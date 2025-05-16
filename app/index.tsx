@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 export default function Index() {
   useEffect(() => {
-    router.replace('/login');
+    router.replace('/login_child');
   }, []);
 
   return null;

@@ -24,7 +24,8 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
-        <Stack.Screen name="login" options={{ title: '로그인' }} />
+        <Stack.Screen name="login_child" options={{ title: '로그인' }} />
+        <Stack.Screen name="login_parent" options={{ title: '로그인' }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
       </Stack>
