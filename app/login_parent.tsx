@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import {
+  Image,
+  Keyboard,
   SafeAreaView,
   StyleProp,
   StyleSheet,
@@ -11,6 +13,7 @@ import {
   View,
 } from 'react-native';
 
+import LoginBackground from '@/components/LoginBackground'; // 그라데이션 배경
 import { router } from 'expo-router';
 
 export default function LoginScreenParent() {
@@ -28,6 +31,10 @@ export default function LoginScreenParent() {
     }, 0);
   };
 
+  const handleKeyboard = () => {
+    Keyboard.dismiss(); // ✅ 키보드 내리기
+  };
+
   const handleLogin = () => {
     if (password.trim().length === 0) {
       alert('비밀번호를 입력해주세요!');
@@ -42,43 +49,53 @@ export default function LoginScreenParent() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.emoji}>🐼</Text>
-      <Text style={styles.title}>DO,IT</Text>
+    <LoginBackground>
+      <SafeAreaView style={styles.container}>
+        <Image
+          source={require('@/assets/images/panda.png')}
+          style={styles.panda}
+        />
+        <Text style={styles.title}>DO,IT</Text>
 
-      <TextInput
-        value={phone}
-        onChangeText={setPhone}
-        style={styles.input as StyleProp<TextStyle>}
-        placeholder="전화번호를 입력하세요."
-        placeholderTextColor="#999"
-        keyboardType="phone-pad"
-      />
+        <TextInput
+          value={phone}
+          onChangeText={setPhone}
+          style={styles.inputCall as StyleProp<TextStyle>}
+          placeholder="전화번호를 입력하세요."
+          placeholderTextColor="#999"
+          keyboardType="phone-pad"
+          onSubmitEditing={handleKeyboard}
+        />
 
-      <TextInput
-        value={password}
-        onChangeText={setPassword}
-        style={styles.input as StyleProp<TextStyle>}
-        placeholder="비밀번호를 입력하세요."
-        placeholderTextColor="#999"
-        secureTextEntry
-        onSubmitEditing={handleLogin}
-      />
+        <TextInput
+          value={password}
+          onChangeText={setPassword}
+          style={styles.inputPw as StyleProp<TextStyle>}
+          placeholder="비밀번호를 입력하세요."
+          placeholderTextColor="#999"
+          secureTextEntry
+          onSubmitEditing={handleKeyboard}
+        />
 
-      <View style={styles.switchContainer}>
-        <Text style={styles.switchLabel}>사용자 본인이 부모인가요?</Text>
-        <Switch value={isParent} onValueChange={toggleSwitch} />
-      </View>
-
-      <View style={styles.divider} />
-
-      <View style={styles.footer}>
-        <Text style={styles.footerText}>처음이신가요? </Text>
-        <TouchableOpacity>
-          <Text style={styles.signup}>회원가입</Text>
+        <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
+          <Text style={styles.loginButtonText}>로그인</Text>
         </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+
+        <View style={styles.switchContainer}>
+          <Text style={styles.switchLabel}>사용자 본인이 부모인가요?</Text>
+          <Switch value={isParent} onValueChange={toggleSwitch} />
+        </View>
+
+        <View style={styles.divider} />
+
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>처음이신가요? </Text>
+          <TouchableOpacity>
+            <Text style={styles.signup}>회원가입</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    </LoginBackground>
   );
 }
 
@@ -89,54 +106,92 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 24,
-    backgroundColor: '#fff',
+    marginTop: 10,
+    marginBottom: -10,
   },
-  emoji: {
-    fontSize: 60,
-    marginBottom: 8,
+  panda: {
+    width: 180,
+    height: 180,
+    marginBottom: 2,
+    resizeMode: 'contain',
   },
   title: {
-    fontSize: 36,
+    fontSize: 60,
     fontWeight: 'bold',
+    color: '#D8B4F8',
     marginBottom: 40,
+
+    textShadowColor: '#bab1c4',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 4,
   },
-  input: {
+  inputCall: {
     width: '80%',
-    height: 35,
+    height: 40,
     paddingHorizontal: 14,
-    borderWidth: 1,
-    borderColor: '#000',
     borderRadius: 30,
-    marginBottom: 16,
+    marginBottom: 9,
     color: '000',
+    backgroundColor: '#ffffff',
     fontSize: 13,
+    textAlign: 'center',
+  },
+  inputPw: {
+    width: '80%',
+    height: 40,
+    paddingHorizontal: 14,
+    borderRadius: 30,
+    marginBottom: 40,
+    color: '000',
+    backgroundColor: '#ffffff',
+    fontSize: 13,
+    textAlign: 'center',
+  },
+  loginButton: {
+    backgroundColor: '#D8B4F8',
+    borderRadius: 30,
+    width: '80%',
+    paddingVertical: 14,
+    paddingHorizontal: 60,
+    marginTop: 20,
+    marginBottom: 12,
+  },
+  loginButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 15,
     textAlign: 'center',
   },
   switchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 24,
-    marginBottom: 16,
+    justifyContent: 'center',
+    marginTop: 30,
+    marginBottom: 6,
+    gap: 60,
   },
   switchLabel: {
     marginRight: 12,
     fontSize: 14,
+    color: '#737373',
   },
   divider: {
-    width: '85%',
+    width: '80%',
     borderBottomWidth: 2,
     borderBottomColor: '#ccc',
-    marginVertical: 20,
+    marginVertical: 10,
   },
   footer: {
     flexDirection: 'row',
   },
   footerText: {
     fontSize: 14,
+    color: '#737373',
   },
   signup: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: '#000',
+    color: '#312218',
+    marginLeft: 10,
   },
 });
