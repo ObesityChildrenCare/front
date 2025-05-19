@@ -48,6 +48,10 @@ export default function LoginScreenParent() {
     // router.replace('/(tabs)');
   };
 
+  const routerSignup = () => {
+    router.push('/signup_name');
+  };
+
   return (
     <LoginBackground>
       <SafeAreaView style={styles.container}>
@@ -90,7 +94,7 @@ export default function LoginScreenParent() {
 
         <View style={styles.footer}>
           <Text style={styles.footerText}>처음이신가요? </Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={routerSignup}>
             <Text style={styles.signup}>회원가입</Text>
           </TouchableOpacity>
         </View>
