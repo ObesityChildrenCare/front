@@ -52,7 +52,7 @@ export default function LoginScreenParent() {
     <LoginBackground>
       <SafeAreaView style={styles.container}>
         <Image
-          source={require('@/assets/images/panda.png')}
+          source={require('@/assets/images/smile_panda.png')}
           style={styles.panda}
         />
         <Text style={styles.title}>DO,IT</Text>
