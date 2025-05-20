@@ -3,9 +3,10 @@
    먹은것과 운동중에 무엇을 기록하고 싶은지 선택하는 창
 
 */
-import { router } from 'expo-router';
+import { router,} from 'expo-router';
 import React, { useState } from 'react';
 import {
+    BackHandler,
     Image,
     SafeAreaView,
     StyleSheet,
@@ -25,9 +26,8 @@ export default function InputSelect() {
 
     // 뒤로가기
     const handleBack = () => {
-        router.back();
+        router.replace('/login_child');
     }
-
 
     // 다음 버튼 함수
     const handleNext = () => {
@@ -41,14 +41,16 @@ export default function InputSelect() {
 
     return (
         <LoginBackground>
+            { /* 뒤로가기 버튼 */}
+            <TouchableOpacity onPress={handleBack} style={styles.backArrow}>
+                <Text style={styles.arrowText}>
+                    {'\u2190'}
+                </Text>
+            </TouchableOpacity>
+
             <SafeAreaView style={styles.container}>
 
-                { /* 뒤로가기 버튼 */}
-                <TouchableOpacity onPress={handleBack} style={styles.backArrow}>
-                    <Text style={styles.backArrow}>
-                        {'\u2190'}
-                    </Text>
-                </TouchableOpacity>
+
 
                 { /* 판다 이미지 */}
                 <Image
@@ -116,18 +118,20 @@ export default function InputSelect() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
         paddingHorizontal: 24,
-        marginTop: 10,
+        marginTop: 130,
         marginBottom: -10,
     },
     backArrow: {
         position: 'absolute',
-        top: 25,
-        left: 15,
+        top: 50,
+        left: 20,
+    },
+    arrowText: {
         fontSize: 30,
-        zIndex: 1,
+        color: '#2E0854',
     },
     arrow: {
         fontSize: 24,

@@ -49,16 +49,13 @@ export default function InputFood3() {
 
     return (
         <LoginBackground>
-            <SafeAreaView style={styles.container}>
 
-                { /* 뒤로가기 버튼 */}
-                <TouchableOpacity onPress={handleBack} style={styles.backArrow}>
-                    <Text style={styles.backArrow}>
-                        {'\u2190'}
-                    </Text>
-                </TouchableOpacity>
-
-            </SafeAreaView>
+            { /* 뒤로가기 버튼 */}
+            <TouchableOpacity onPress={handleBack} style={styles.backArrow}>
+                <Text style={styles.arrowText}>
+                    {'\u2190'}
+                </Text>
+            </TouchableOpacity>
 
             
 
@@ -127,20 +124,14 @@ export default function InputFood3() {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingHorizontal: 24,
-        marginTop: 10,
-        marginBottom: -10,
-    },
     backArrow: {
         position: 'absolute',
-        top: 25,
-        left: 15,
+        top: 50,
+        left: 20,
+    },
+    arrowText: {
         fontSize: 30,
-        zIndex: 1,
+        color: '#2E0854',
     },
     arrow: {
         fontSize: 24,

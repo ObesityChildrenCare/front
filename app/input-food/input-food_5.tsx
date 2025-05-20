@@ -1,6 +1,6 @@
 /*
 
-   사진을 인식해서 해당 음식을 먹은게 맞는지 물어보는 창
+   9가지 제시된 것 중 맞는게 무엇인지 선택하는 창
 
 */
 import { router } from 'expo-router';
@@ -16,113 +16,93 @@ import {
 
 import LoginBackground from '@/components/LoginBackground';
 
-export default function InputFood4() {
+export default function InputFood5() {
 
-    const [selected, setSelected] = useState<'yes' | 'no' | null>(null);
+    const [selected, setSelected] = useState<'sel1' | 'sel2' | 'sel3' | 'sel4' | 'sel5' | 'sel6' | 'sel7' | 'sel8' | 'sel9' |null>(null);
+    const [isDisabled, setIsDisabled] = useState(false);
 
-    const handleSelect = (option: 'yes' | 'no') => {
+    const handleSelect = (option: typeof selected) => {
+        if (isDisabled) return; // 이미 눌렸으면 무시
         setSelected(option);
-    }
+        setIsDisabled(true);
 
-    // temp 값
-    const foodName = '망고맥주';
-
-    // 받침계산 "(이)잖아?"용
-    const hasFinalConsonant = (word: string) => {
-        const lastChar = word[word.length - 1];
-        const code = lastChar.charCodeAt(0);
-        const baseCode = code - 44032;
-        const jong = baseCode % 28;
-        return jong !== 0;
+        setTimeout(() => {
+            router.push('/input-food/input-food_6');
+        }, 1000);
     };
-
-    const particle = hasFinalConsonant(foodName) ? '이' : '';
 
     // 뒤로가기
     const handleBack = () => {
         router.back();
     }
 
-    // 이전 버튼 함수
-    const handleBefore = () => {
-        router.back();
-    }
-    // 다음 버튼 함수
-    const handleNext = () => {
-            if (selected === 'yes') {
-                router.push('/input-food/input-food_6');
-            } else if (selected === 'no') {
-                router.push('/input-food/input-food_5');
-            } else {
-        }
-    }
 
     return (
         <LoginBackground>
+
+            { /* 뒤로가기 버튼 */}
+            <TouchableOpacity onPress={handleBack} style={styles.backArrow}>
+                <Text style={styles.arrowText}>
+                    {'\u2190'}
+                </Text>
+            </TouchableOpacity>
+
             <SafeAreaView style={styles.container}>
 
-                { /* 뒤로가기 버튼 */}
-                <TouchableOpacity onPress={handleBack} style={styles.backArrow}>
-                    <Text style={styles.backArrow}>
-                        {'\u2190'}
-                    </Text>
-                </TouchableOpacity>
 
                 <View style={styles.pandaWrapper}>
-                    {/* 별 */}
-                    <Image source={require('@/assets/images/star.png')} style={styles.star} />
-
                     {/* 판다 */}
                     <Image source={require('@/assets/images/sup_panda.png')} style={styles.panda} />
                 </View>
 
                 { /* 텍스트 박스 */}
                 <Text style={styles.bigText}>
-                    어라?!
+                    아이쿠, 미안!
                 </Text>
                 <Text style={styles.normalText}>
-                    이건 <Text style={{ fontSize: 23 }}>{foodName}</Text>{particle}잖아?
+                    혹시 너가 뭘 먹었는지{'\n'}다시 알려줄래?
                 </Text>
 
-                
-                {/* 응 */}
-                <TouchableOpacity
-                    onPress={() => handleSelect('yes')}
-                    style={[
-                        styles.selectBox,
-                        selected === 'yes' && styles.selectBoxSelected,  //선택 됐으면 글로우 효과
-                        { opacity: selected !== 'yes' && selected !== null ? 0.3 : 1 },      //선택 안 됐으면 투명하게
-                    ]}
-                >
-                    <Text style={styles.selectBoxText}>응</Text>
-                </TouchableOpacity>
-                {/* 아니야 */}
-                <TouchableOpacity
-                    onPress={() => handleSelect('no')}
-                    style={[
-                        styles.selectBox,
-                        selected === 'no' && styles.selectBoxSelected,
-                        { backgroundColor: '#FFFFFF' },
-                        { opacity: selected !== 'no' && selected !== null ? 0.3 : 1 },
-                    ]}
-                >
-                    <Text style={styles.selectBoxText}>아니야</Text>
-                </TouchableOpacity>
+                <View style={styles.gridContainer}>
+                    <TouchableOpacity onPress={() => handleSelect('sel1')} disabled={isDisabled} style={[styles.selectBox, selected === 'sel1' && styles.selectBoxSelected]}>
+                        <Text style={styles.selectBoxText}>항목 1</Text>
+                    </TouchableOpacity>
 
+                    <TouchableOpacity onPress={() => handleSelect('sel2')} disabled={isDisabled} style={[styles.selectBox, selected === 'sel2' && styles.selectBoxSelected]}>
+                        <Text style={styles.selectBoxText}>항목 2</Text>
+                    </TouchableOpacity>
 
+                    <TouchableOpacity onPress={() => handleSelect('sel3')} disabled={isDisabled} style={[styles.selectBox, selected === 'sel3' && styles.selectBoxSelected]}>
+                        <Text style={styles.selectBoxText}>항목 3</Text>
+                    </TouchableOpacity>
 
+                    <TouchableOpacity onPress={() => handleSelect('sel4')} disabled={isDisabled} style={[styles.selectBox, selected === 'sel4' && styles.selectBoxSelected]}>
+                        <Text style={styles.selectBoxText}>항목 4</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress={() => handleSelect('sel5')} disabled={isDisabled} style={[styles.selectBox, selected === 'sel5' && styles.selectBoxSelected]}>
+                        <Text style={styles.selectBoxText}>항목 5</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress={() => handleSelect('sel6')} disabled={isDisabled} style={[styles.selectBox, selected === 'sel6' && styles.selectBoxSelected]}>
+                        <Text style={styles.selectBoxText}>항목 6</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress={() => handleSelect('sel7')} disabled={isDisabled} style={[styles.selectBox, selected === 'sel7' && styles.selectBoxSelected]}>
+                        <Text style={styles.selectBoxText}>항목 7</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress={() => handleSelect('sel8')} disabled={isDisabled} style={[styles.selectBox, selected === 'sel8' && styles.selectBoxSelected]}>
+                        <Text style={styles.selectBoxText}>항목 8</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress={() => handleSelect('sel9')} disabled={isDisabled} style={[styles.selectBox, selected === 'sel9' && styles.selectBoxSelected]}>
+                        <Text style={styles.selectBoxText}>항목 9</Text>
+                    </TouchableOpacity>
+
+                </View>
 
             </SafeAreaView>
-
-            { /* 다음 버튼 */}
-            <View style={styles.fixedButtonContainer}>
-                <TouchableOpacity onPress={handleBefore} style={styles.arrowButtonLeft}>
-                    <Text style={styles.arrow}>{'\u2190'}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={handleNext} style={styles.arrowButtonRight}>
-                    <Text style={styles.arrow}>{'\u2192'}</Text>
-                </TouchableOpacity>
-            </View>
 
         </LoginBackground>
     );
@@ -131,18 +111,20 @@ export default function InputFood4() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
         paddingHorizontal: 24,
-        marginTop: 10,
+        marginTop: 130,
         marginBottom: -10,
     },
     backArrow: {
         position: 'absolute',
-        top: 25,
-        left: 15,
+        top: 50,
+        left: 20,
+    },
+    arrowText: {
         fontSize: 30,
-        zIndex: 1,
+        color: '#2E0854',
     },
     arrow: {
         fontSize: 24,
@@ -153,33 +135,6 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
         marginTop: 60,
     },
-    fixedButtonContainer: {
-        position: 'absolute',
-        bottom: 50,
-        left: 0,
-        right: 0,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingHorizontal: 55,
-    },
-      
-    arrowButtonLeft: {
-        backgroundColor: '#E6E6FA',
-        borderRadius: 50,
-        width: 83,
-        height: 50,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-
-    arrowButtonRight: {
-        backgroundColor: '#D8B4F8',
-        borderRadius: 50,
-        width: 83,
-        height: 50,
-        justifyContent: 'center',
-        alignItems: 'center',
-      },
     pandaWrapper: {
         position: 'relative',
         width: 180,
@@ -193,20 +148,11 @@ const styles = StyleSheet.create({
         height: '100%',
         resizeMode: 'contain',
     },
-
-    star: {
-        position: 'absolute',
-        top: -20,
-        left: 175,
-        width: 70,
-        height: 70,
-        resizeMode: 'contain',
-    },
     bigText: {
         fontSize: 26,
         color: "#2E0854",
         textAlign: 'center',
-        marginBottom: 15,
+        marginBottom: 5,
         marginTop: 20,
         fontWeight: 'bold',
     },
@@ -214,34 +160,37 @@ const styles = StyleSheet.create({
         fontSize: 22,
         color: "#2E0854",
         textAlign: 'center',
-        marginBottom: 50,
+        marginBottom: 10,
         marginTop: 0,
         fontWeight: 'bold',
     },
 
-    selectBox: {
-        width: '80%',
-        height: 45,
-        backgroundColor: 'rgba(216, 180, 248, 0.37)',
-        borderRadius: 30,
-        paddingHorizontal: 16,
-        paddingVertical: 11,
-        marginBottom: 20,
+    gridContainer: {
+        flexDirection: 'row',     
+        flexWrap: 'wrap',          
+        justifyContent: 'center',  
+        gap: 20,                   
+        marginTop: 20,
+        paddingHorizontal: 10,
     },
+    selectBox: {
+        width: 80,
+        height: 80,
+        backgroundColor: '#E6E6FA',
+        borderRadius: 15,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
 
     selectBoxSelected: {
-        shadowColor: '#D8B4F8',
-        shadowOffset: { width: 0, height: 0 },
-        shadowOpacity: 0.8,
-        shadowRadius: 12,
-        elevation: 10,
+        borderWidth: 3, 
+        borderColor: 'rgba(46, 8, 84, 0.42)', 
     },
 
     selectBoxText: {
         textAlign: 'center',
-        fontSize: 18,
+        fontSize: 13,
         color: '#2E0854',
         fontWeight: "bold",
-        lineHeight: 26,
     },
 });
