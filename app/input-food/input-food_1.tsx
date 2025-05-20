@@ -16,7 +16,7 @@ import {
 
 import LoginBackground from '@/components/LoginBackground';
 
-export default function InputFoodMain() {
+export default function InputFood1() {
 
     const [selected, setSelected] = useState<'meal' | 'snack' | null>(null);
     
@@ -119,7 +119,7 @@ export default function InputFoodMain() {
                     <Text style={styles.arrow}>{'\u2192'}</Text>
                 </TouchableOpacity>
             </View>
-            
+
         </LoginBackground>
     );
 }
@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
     selectBox: {
         width: '80%',
         height: 45,
-        backgroundColor: '#D8B4F8',
+        backgroundColor: 'rgba(216, 180, 248, 0.37)',
         borderRadius: 30,
         paddingHorizontal: 16,
         paddingVertical: 11,
@@ -235,12 +235,11 @@ const styles = StyleSheet.create({
     },
 
     selectBoxSelected: {
-        backgroundColor: '#D8B4F8',
-        shadowColor: '#D8B4F8',  
+        shadowColor: '#D8B4F8',
         shadowOffset: { width: 0, height: 0 },
-        shadowOpacity: 0.6,
+        shadowOpacity: 0.8,
         shadowRadius: 12,
-        elevation: 10,   
+        elevation: 10,
     },
 
     selectBoxText: {
@@ -248,5 +247,6 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: '#2E0854',
         fontWeight: "bold",
+        lineHeight: 26,
     },
 });

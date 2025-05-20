@@ -1,6 +1,6 @@
 /*
 
-   사진을 어떻게 불러올건지, 찍을건지, 없는지 선택하는 창
+   사진을 인식해서 해당 음식을 먹은게 맞는지 물어보는 창
 
 */
 import { router } from 'expo-router';
@@ -16,13 +16,27 @@ import {
 
 import LoginBackground from '@/components/LoginBackground';
 
-export default function InputFood2() {
+export default function InputFood4() {
 
-    const [selected, setSelected] = useState<'gal' | 'photo' | 'none' |null>(null);
-    
-    const handleSelect = (option: 'gal' | 'photo' | 'none' ) => {
+    const [selected, setSelected] = useState<'yes' | 'no' | null>(null);
+
+    const handleSelect = (option: 'yes' | 'no') => {
         setSelected(option);
     }
+
+    // temp 값
+    const foodName = '망고맥주';
+
+    // 받침계산 "(이)잖아?"용
+    const hasFinalConsonant = (word: string) => {
+        const lastChar = word[word.length - 1];
+        const code = lastChar.charCodeAt(0);
+        const baseCode = code - 44032;
+        const jong = baseCode % 28;
+        return jong !== 0;
+    };
+
+    const particle = hasFinalConsonant(foodName) ? '이' : '';
 
     // 뒤로가기
     const handleBack = () => {
@@ -35,7 +49,12 @@ export default function InputFood2() {
     }
     // 다음 버튼 함수
     const handleNext = () => {
-        router.push('/input-food/input-food_3')
+            if (selected === 'yes') {
+                router.push('/input-food/input-food_6');
+            } else if (selected === 'no') {
+                router.push('/input-food/input-food_5');
+            } else {
+        }
     }
 
     return (
@@ -50,70 +69,46 @@ export default function InputFood2() {
                 </TouchableOpacity>
 
                 <View style={styles.pandaWrapper}>
-                    {/* 연필 */}
-                    <Image source={require('@/assets/images/pencil.png')} style={styles.pencil} />
+                    {/* 별 */}
+                    <Image source={require('@/assets/images/star.png')} style={styles.star} />
 
                     {/* 판다 */}
-                    <Image source={require('@/assets/images/smile_panda.png')} style={styles.panda} />
+                    <Image source={require('@/assets/images/sup_panda.png')} style={styles.panda} />
                 </View>
 
                 { /* 텍스트 박스 */}
                 <Text style={styles.bigText}>
-                    맛있겠다~
+                    어라?!
                 </Text>
                 <Text style={styles.normalText}>
-                    그럼 우리 오늘 먹은걸{'\n'}기록해보자!
+                    이건 <Text style={{ fontSize: 23 }}>{foodName}</Text>{particle}잖아?
                 </Text>
 
                 
-
-                {/* 갤러리에서 찾을래 */}
+                {/* 응 */}
                 <TouchableOpacity
-                    onPress={() => handleSelect('gal')}
+                    onPress={() => handleSelect('yes')}
                     style={[
                         styles.selectBox,
-                        selected === 'gal' && styles.selectBoxSelected,  //선택 됐으면 글로우 효과
-                        { opacity: selected !== 'gal' && selected !== null ? 0.3 : 1 },      //선택 안 됐으면 투명하게
+                        selected === 'yes' && styles.selectBoxSelected,  //선택 됐으면 글로우 효과
+                        { opacity: selected !== 'yes' && selected !== null ? 0.3 : 1 },      //선택 안 됐으면 투명하게
                     ]}
                 >
-
-                    <Text style={styles.selectBoxText}>갤러리에서 찾을래</Text>
-
+                    <Text style={styles.selectBoxText}>응</Text>
                 </TouchableOpacity>
-
-                
-
-                {/* 지금 찍어서 보여줄게 */}
+                {/* 아니야 */}
                 <TouchableOpacity
-                    onPress={() => handleSelect('photo')}
+                    onPress={() => handleSelect('no')}
                     style={[
                         styles.selectBox,
-                        selected === 'photo' && styles.selectBoxSelected,
-                        { backgroundColor: 'rgba(216, 180, 248, 0.37)' },
-                        { opacity: selected !== 'photo' && selected !== null ? 0.3 : 1 },
-                    ]}
-                >
-
-                    <Text style={styles.selectBoxText}>지금 찍어서 보여줄게</Text>
-
-                </TouchableOpacity>
-
-                
-
-                {/* 사진이 없어 */}
-                <TouchableOpacity
-                    onPress={() => handleSelect('none')}
-                    style={[
-                        styles.selectBox,
-                        selected === 'none' && styles.selectBoxSelected,
+                        selected === 'no' && styles.selectBoxSelected,
                         { backgroundColor: '#FFFFFF' },
-                        { opacity: selected !== 'none' && selected !== null ? 0.3 : 1 },
+                        { opacity: selected !== 'no' && selected !== null ? 0.3 : 1 },
                     ]}
                 >
-
-                    <Text style={styles.selectBoxText}>사진이 없어...</Text>
-
+                    <Text style={styles.selectBoxText}>아니야</Text>
                 </TouchableOpacity>
+
 
 
 
@@ -199,7 +194,7 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
 
-    pencil: {
+    star: {
         position: 'absolute',
         top: -20,
         left: 175,
@@ -211,7 +206,7 @@ const styles = StyleSheet.create({
         fontSize: 26,
         color: "#2E0854",
         textAlign: 'center',
-        marginBottom: 5,
+        marginBottom: 15,
         marginTop: 20,
         fontWeight: 'bold',
     },
@@ -219,7 +214,7 @@ const styles = StyleSheet.create({
         fontSize: 22,
         color: "#2E0854",
         textAlign: 'center',
-        marginBottom: 35,
+        marginBottom: 50,
         marginTop: 0,
         fontWeight: 'bold',
     },
@@ -227,7 +222,7 @@ const styles = StyleSheet.create({
     selectBox: {
         width: '80%',
         height: 45,
-        backgroundColor: '#E6E6FA',
+        backgroundColor: 'rgba(216, 180, 248, 0.37)',
         borderRadius: 30,
         paddingHorizontal: 16,
         paddingVertical: 11,

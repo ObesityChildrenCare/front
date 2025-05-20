@@ -1,6 +1,6 @@
 /*
 
-   사진을 어떻게 불러올건지, 찍을건지, 없는지 선택하는 창
+   이 사진이 맞는지 확인하는 창
 
 */
 import { router } from 'expo-router';
@@ -11,18 +11,25 @@ import {
     StyleSheet,
     Text,
     TouchableOpacity,
-    View
+    View,
+    Dimensions
 } from 'react-native';
 
 import LoginBackground from '@/components/LoginBackground';
 
-export default function InputFood2() {
+// 화면 길이
+const screenWidth = Dimensions.get('window').width;
+const screenHeight = Dimensions.get('window').height;
 
-    const [selected, setSelected] = useState<'gal' | 'photo' | 'none' |null>(null);
+export default function InputFood3() {
+
+    const [selected, setSelected] = useState<'yes' | 'no' |null>(null);
     
-    const handleSelect = (option: 'gal' | 'photo' | 'none' ) => {
+    const handleSelect = (option: 'yes' | 'no' ) => {
         setSelected(option);
     }
+
+
 
     // 뒤로가기
     const handleBack = () => {
@@ -35,7 +42,9 @@ export default function InputFood2() {
     }
     // 다음 버튼 함수
     const handleNext = () => {
-        router.push('/input-food/input-food_3')
+        if (selected === 'yes') {
+            router.push('/input-food/input-food_4');
+        }
     }
 
     return (
@@ -49,76 +58,60 @@ export default function InputFood2() {
                     </Text>
                 </TouchableOpacity>
 
-                <View style={styles.pandaWrapper}>
-                    {/* 연필 */}
-                    <Image source={require('@/assets/images/pencil.png')} style={styles.pencil} />
-
-                    {/* 판다 */}
-                    <Image source={require('@/assets/images/smile_panda.png')} style={styles.panda} />
-                </View>
-
-                { /* 텍스트 박스 */}
-                <Text style={styles.bigText}>
-                    맛있겠다~
-                </Text>
-                <Text style={styles.normalText}>
-                    그럼 우리 오늘 먹은걸{'\n'}기록해보자!
-                </Text>
-
-                
-
-                {/* 갤러리에서 찾을래 */}
-                <TouchableOpacity
-                    onPress={() => handleSelect('gal')}
-                    style={[
-                        styles.selectBox,
-                        selected === 'gal' && styles.selectBoxSelected,  //선택 됐으면 글로우 효과
-                        { opacity: selected !== 'gal' && selected !== null ? 0.3 : 1 },      //선택 안 됐으면 투명하게
-                    ]}
-                >
-
-                    <Text style={styles.selectBoxText}>갤러리에서 찾을래</Text>
-
-                </TouchableOpacity>
-
-                
-
-                {/* 지금 찍어서 보여줄게 */}
-                <TouchableOpacity
-                    onPress={() => handleSelect('photo')}
-                    style={[
-                        styles.selectBox,
-                        selected === 'photo' && styles.selectBoxSelected,
-                        { backgroundColor: 'rgba(216, 180, 248, 0.37)' },
-                        { opacity: selected !== 'photo' && selected !== null ? 0.3 : 1 },
-                    ]}
-                >
-
-                    <Text style={styles.selectBoxText}>지금 찍어서 보여줄게</Text>
-
-                </TouchableOpacity>
-
-                
-
-                {/* 사진이 없어 */}
-                <TouchableOpacity
-                    onPress={() => handleSelect('none')}
-                    style={[
-                        styles.selectBox,
-                        selected === 'none' && styles.selectBoxSelected,
-                        { backgroundColor: '#FFFFFF' },
-                        { opacity: selected !== 'none' && selected !== null ? 0.3 : 1 },
-                    ]}
-                >
-
-                    <Text style={styles.selectBoxText}>사진이 없어...</Text>
-
-                </TouchableOpacity>
-
-
-
             </SafeAreaView>
 
+            
+
+            <View style={styles.pandaWrapper}>
+
+                {/* 배경 */}
+                <View style={styles.background1} />
+                <View style={styles.background2} />
+
+                {/* 제출한 사진 */}
+                <Image source={require('@/assets/images/TempPicture.jpg')} style={styles.picture} />
+                
+                {/* 판다 */}
+                <Image source={require('@/assets/images/head_panda.png')} style={styles.panda} />
+
+                { /* 텍스트 박스 */}
+                <Text style={styles.normalText}>
+                    이거 맞아?
+                </Text>
+            </View>
+
+
+
+            
+            <View style={styles.selectionContainer}>
+                {/* 아니야 */}
+                <TouchableOpacity
+                    onPress={() => handleSelect('no')}
+                    style={[
+                        styles.selectBox2,
+                        selected === 'no' && styles.selectBoxSelected,
+                        { opacity: selected !== 'no' && selected !== null ? 0.3 : 1 },
+                    ]}
+                >
+                    <Text style={styles.selectBoxText}>아니야</Text>
+                </TouchableOpacity>
+                {/* 맞아 */}
+                <TouchableOpacity
+                    onPress={() => handleSelect('yes')}
+                    style={[
+                        styles.selectBox,
+                        selected === 'yes' && styles.selectBoxSelected,  //선택 됐으면 글로우 효과
+                        { opacity: selected !== 'yes' && selected !== null ? 0.3 : 1 },      //선택 안 됐으면 투명하게
+                    ]}
+                >
+                    <Text style={styles.selectBoxText}>맞아</Text>
+                </TouchableOpacity>
+
+
+            </View>
+
+            
+            
             { /* 다음 버튼 */}
             <View style={styles.fixedButtonContainer}>
                 <TouchableOpacity onPress={handleBefore} style={styles.arrowButtonLeft}>
@@ -158,6 +151,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
         marginTop: 60,
     },
+
     fixedButtonContainer: {
         position: 'absolute',
         bottom: 50,
@@ -184,49 +178,83 @@ const styles = StyleSheet.create({
         height: 50,
         justifyContent: 'center',
         alignItems: 'center',
-      },
+    },
+    
     pandaWrapper: {
-        position: 'relative',
-        width: 180,
-        height: 180,
-        alignItems: 'center',
-        justifyContent: 'center',
+        position: 'absolute',
+        top: 140,
+        left: 30,
+        flexDirection: 'row', 
+        alignItems: 'center', 
+        padding: 10,      
     },
 
     panda: {
-        width: '100%',
-        height: '100%',
+        width: 50,
+        height: 50,
         resizeMode: 'contain',
+        zIndex: 10,
     },
 
-    pencil: {
+    background1: {
         position: 'absolute',
-        top: -20,
-        left: 175,
-        width: 70,
+        width: screenWidth-60,
         height: 70,
-        resizeMode: 'contain',
+        backgroundColor: 'rgba(215, 215, 240, 0.83)',
+        borderRadius: 90,
+        top: 0,
+        left: 0,
+        zIndex: 1,
     },
-    bigText: {
-        fontSize: 26,
-        color: "#2E0854",
-        textAlign: 'center',
-        marginBottom: 5,
-        marginTop: 20,
-        fontWeight: 'bold',
+    background2: {
+        position: 'absolute',
+        width: screenWidth - 140,
+        height: 50,
+        backgroundColor: 'rgba(255, 255, 255, 1)',
+        borderRadius: 90,
+        top: 10,
+        left: 70,
+        zIndex: 2,
     },
+    picture: {
+        position: 'absolute',
+        width: screenWidth - 60,
+        height: screenHeight - 450,
+        borderRadius: 30,
+        top: 90,
+        left: 0,
+        zIndex: 2,
+    },
+
     normalText: {
-        fontSize: 22,
-        color: "#2E0854",
-        textAlign: 'center',
-        marginBottom: 35,
-        marginTop: 0,
+        fontSize: 18,
+        color: '#2E0854',
         fontWeight: 'bold',
+        marginLeft: 25,
+        zIndex: 10,
+      },
+    selectionContainer: {
+        position: 'absolute',
+        bottom: 90,
+        left: 0,
+        right: 0,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingHorizontal: 55,
     },
 
     selectBox: {
-        width: '80%',
-        height: 45,
+        width: 83,
+        height: 50,
+        backgroundColor: 'rgba(216, 180, 248, 0.37)',
+        borderRadius: 30,
+        paddingHorizontal: 16,
+        paddingVertical: 11,
+        marginBottom: 20,
+    },
+    selectBox2: {
+        width: 83,
+        height: 50,
         backgroundColor: '#E6E6FA',
         borderRadius: 30,
         paddingHorizontal: 16,

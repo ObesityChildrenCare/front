@@ -48,7 +48,7 @@ export default function LoginScreenChild() {
 
   // 선택창으로 진입하기 위한 테스트 함수
   const testEvent = () => {
-    router.push('/input-food/input-main');
+    router.push('/input-food/input-select');
   }
 
   return (

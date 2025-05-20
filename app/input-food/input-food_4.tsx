@@ -1,6 +1,6 @@
 /*
 
-   먹은것과 운동중에 무엇을 기록하고 싶은지 선택하는 창
+   사진을 인식해서 해당 음식을 먹은게 맞는지 물어보는 창
 
 */
 import { router } from 'expo-router';
@@ -16,26 +16,44 @@ import {
 
 import LoginBackground from '@/components/LoginBackground';
 
-export default function InputFoodMain() {
+export default function InputFood4() {
 
-    const [selected, setSelected] = useState<'food' | 'exercise' | null>(null);
-    const handleSelect = (option: 'food' | 'exercise') => {
+    const [selected, setSelected] = useState<'yes' | 'no' | null>(null);
+
+    const handleSelect = (option: 'yes' | 'no') => {
         setSelected(option);
+    }
+
+    // temp 값
+    const foodName = '망고맥주';
+
+    // 받침계산 "(이)잖아?"용
+    const hasFinalConsonant = (word: string) => {
+        const lastChar = word[word.length - 1];
+        const code = lastChar.charCodeAt(0);
+        const baseCode = code - 44032;
+        const jong = baseCode % 28;
+        return jong !== 0;
     };
+
+    const particle = hasFinalConsonant(foodName) ? '이' : '';
 
     // 뒤로가기
     const handleBack = () => {
         router.back();
     }
 
-
+    // 이전 버튼 함수
+    const handleBefore = () => {
+        router.back();
+    }
     // 다음 버튼 함수
     const handleNext = () => {
-        if (selected === 'food') {
-            router.push('/input-food/input-food_1');
-        } else if (selected === 'exercise') {
-            router.push('/input-food/input-exer_1');
-        } else {
+            if (selected === 'yes') {
+                router.push('/input-food/input-food_6');
+            } else if (selected === 'no') {
+                router.push('/input-food/input-food_5');
+            } else {
         }
     }
 
@@ -50,60 +68,57 @@ export default function InputFoodMain() {
                     </Text>
                 </TouchableOpacity>
 
-                { /* 판다 이미지 */}
-                <Image
-                    source={require('@/assets/images/smile_panda.png')}
-                    style={styles.panda}
-                />
+                <View style={styles.pandaWrapper}>
+                    {/* 별 */}
+                    <Image source={require('@/assets/images/star.png')} style={styles.star} />
+
+                    {/* 판다 */}
+                    <Image source={require('@/assets/images/sup_panda.png')} style={styles.panda} />
+                </View>
 
                 { /* 텍스트 박스 */}
                 <Text style={styles.bigText}>
-                    반가워
+                    어라?!
                 </Text>
                 <Text style={styles.normalText}>
-                    무엇을 기록하고 싶어?
+                    이건 <Text style={{ fontSize: 23 }}>{foodName}</Text>{particle}잖아?
                 </Text>
 
-
-
-                {/* 먹방 선택 */}
+                
+                {/* 응 */}
                 <TouchableOpacity
-                    onPress={() => handleSelect('food')}
+                    onPress={() => handleSelect('yes')}
                     style={[
                         styles.selectBox,
-                        selected === 'food' && styles.selectBoxSelected, //선택되면 글로우 효과
-                        { opacity: selected === 'exercise' ? 0.3 : 1 },  //선택 안 됐으면 투명하게
+                        selected === 'yes' && styles.selectBoxSelected,  //선택 됐으면 글로우 효과
+                        { opacity: selected !== 'yes' && selected !== null ? 0.3 : 1 },      //선택 안 됐으면 투명하게
                     ]}
                 >
-
-                    <Text style={styles.selectBoxText}>
-                        <Text style={{ fontWeight: 'bold' }}>먹방</Text>을 기록할래
-                    </Text>
-
+                    <Text style={styles.selectBoxText}>응</Text>
                 </TouchableOpacity>
-
-                {/* 운동 선택 */}
+                {/* 아니야 */}
                 <TouchableOpacity
-                    onPress={() => handleSelect('exercise')}
+                    onPress={() => handleSelect('no')}
                     style={[
                         styles.selectBox,
-                        selected === 'exercise' && styles.selectBoxSelected,
-                        { backgroundColor: '#7399EA' },
-                        { opacity: selected === 'food' ? 0.3 : 1 },
+                        selected === 'no' && styles.selectBoxSelected,
+                        { backgroundColor: '#FFFFFF' },
+                        { opacity: selected !== 'no' && selected !== null ? 0.3 : 1 },
                     ]}
                 >
-
-                    <Text style={styles.selectBoxText}>
-                        <Text style={{ fontWeight: 'bold' }}>운동</Text>을 기록할래
-                    </Text>
-
+                    <Text style={styles.selectBoxText}>아니야</Text>
                 </TouchableOpacity>
+
+
 
 
             </SafeAreaView>
 
             { /* 다음 버튼 */}
             <View style={styles.fixedButtonContainer}>
+                <TouchableOpacity onPress={handleBefore} style={styles.arrowButtonLeft}>
+                    <Text style={styles.arrow}>{'\u2190'}</Text>
+                </TouchableOpacity>
                 <TouchableOpacity onPress={handleNext} style={styles.arrowButtonRight}>
                     <Text style={styles.arrow}>{'\u2192'}</Text>
                 </TouchableOpacity>
@@ -141,11 +156,13 @@ const styles = StyleSheet.create({
     fixedButtonContainer: {
         position: 'absolute',
         bottom: 50,
-        right: 55,
-        alignItems: 'flex-end',
-        width: '100%',
+        left: 0,
+        right: 0,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingHorizontal: 55,
     },
-
+      
     arrowButtonLeft: {
         backgroundColor: '#E6E6FA',
         borderRadius: 50,
@@ -162,11 +179,27 @@ const styles = StyleSheet.create({
         height: 50,
         justifyContent: 'center',
         alignItems: 'center',
-    },
-    panda: {
+      },
+    pandaWrapper: {
+        position: 'relative',
         width: 180,
         height: 180,
-        marginBottom: 2,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
+    panda: {
+        width: '100%',
+        height: '100%',
+        resizeMode: 'contain',
+    },
+
+    star: {
+        position: 'absolute',
+        top: -20,
+        left: 175,
+        width: 70,
+        height: 70,
         resizeMode: 'contain',
     },
     bigText: {
@@ -189,7 +222,7 @@ const styles = StyleSheet.create({
     selectBox: {
         width: '80%',
         height: 45,
-        backgroundColor: '#9BCC97',
+        backgroundColor: 'rgba(216, 180, 248, 0.37)',
         borderRadius: 30,
         paddingHorizontal: 16,
         paddingVertical: 11,
@@ -197,10 +230,9 @@ const styles = StyleSheet.create({
     },
 
     selectBoxSelected: {
-        backgroundColor: '#9BCC97',
         shadowColor: '#D8B4F8',
         shadowOffset: { width: 0, height: 0 },
-        shadowOpacity: 0.6,
+        shadowOpacity: 0.8,
         shadowRadius: 12,
         elevation: 10,
     },
@@ -209,5 +241,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 18,
         color: '#2E0854',
+        fontWeight: "bold",
+        lineHeight: 26,
     },
 });
