@@ -23,7 +23,7 @@ export default function SignupNameScreen() {
     router.push('/signup_phone');
   };
 
-  const totalDots = 8;
+  const totalDots = 7;
   const currentIndex = 0; // 현재 활성화된 인덱스
 
   return (
@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 30,
     marginTop: 20,
+    fontWeight: '500',
   },
   input: {
     width: '80%',
@@ -156,7 +157,8 @@ const styles = StyleSheet.create({
 
   paginationContainer: {
     alignItems: 'center',
-    marginBottom: 30,
+    marginBottom: 10,
+    marginTop: 20,
     flexDirection: 'row',
   },
   dot: {

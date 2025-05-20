@@ -1,34 +1,47 @@
 import LoginBackground from '@/components/LoginBackground';
+import * as Clipboard from 'expo-clipboard';
 import { router } from 'expo-router';
-import { useState } from 'react';
 import {
   Image,
   SafeAreaView,
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
 
-export default function SignupPhoneScreen() {
-  const [phone, setPhone] = useState('');
+export default function SignupLastcodeScreen() {
+  const generateRandomCode = () => {
+    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const randomLetters =
+      letters.charAt(Math.floor(Math.random() * letters.length)) +
+      letters.charAt(Math.floor(Math.random() * letters.length));
+    const randomNumber = String(Math.floor(Math.random() * 100)).padStart(
+      2,
+      '0'
+    );
+    return `2025-${randomLetters}-${randomNumber}`;
+  };
+
+  const code = generateRandomCode();
 
   const handleNext = () => {
-    if (!phone.trim()) {
-      alert('전화번호를 입력해주세요.');
-      return;
-    }
     // 다음 화면으로 이동
-    router.push('/signup_pw');
+    // router.push('/home');
+  };
+
+  const share = () => {
+    // 공유하기 버튼 누르면
   };
 
   const handlePrev = () => {
     router.back();
   };
 
-  const totalDots = 7;
-  const currentIndex = 1; // 현재 활성화된 인덱스
+  const handleCopy = () => {
+    Clipboard.setStringAsync(code);
+    alert('복사되었습니다!');
+  };
 
   return (
     <LoginBackground>
@@ -40,16 +53,18 @@ export default function SignupPhoneScreen() {
 
         <Text style={styles.title}>DO,IT</Text>
         <Text style={styles.description}>
-          로그인 시 사용할{'\n'} 전화번호를 입력해주세요
+          <Text style={{ fontWeight: 'bold' }}>DO,IT</Text>과 함께 해주셔서
+          감사합니다.
+          {'\n'}건강한 하루를 위해 노력하겠습니다.
         </Text>
 
-        <TextInput
-          style={styles.input}
-          placeholder="010-0000-0000"
-          placeholderTextColor="#999"
-          value={phone}
-          onChangeText={setPhone}
-        />
+        <View style={styles.codeBox}>
+          <Text style={styles.codeText}>{code}</Text>
+        </View>
+
+        <TouchableOpacity onPress={handleCopy}>
+          <Text style={styles.copyText}>복사하기</Text>
+        </TouchableOpacity>
 
         <View style={styles.arrowWrapper}>
           <TouchableOpacity style={styles.arrowButtonLeft} onPress={handlePrev}>
@@ -64,26 +79,12 @@ export default function SignupPhoneScreen() {
           </TouchableOpacity>
         </View>
 
-        <View style={styles.paginationContainer}>
-          {Array.from({ length: totalDots }).map((_, idx) => (
-            <Image
-              key={idx}
-              source={
-                idx === currentIndex
-                  ? require('@/assets/images/black_dot.png')
-                  : require('@/assets/images/white_dot.png')
-              }
-              style={styles.dot}
-            />
-          ))}
-        </View>
-
         <View style={styles.pagination} />
 
         <View style={styles.footer}>
-          <Text style={styles.footerText}>계정을 가지고 계신가요? </Text>
-          <TouchableOpacity onPress={() => router.replace('/login_child')}>
-            <Text style={styles.login}>로그인</Text>
+          <Text style={styles.footerText}>내 아이에게 코드 보내기</Text>
+          <TouchableOpacity onPress={share}>
+            <Text style={styles.share}>공유하기</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -99,16 +100,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
   panda: {
-    width: 133,
-    height: 129,
+    width: 180,
+    height: 180,
     marginBottom: 2,
     resizeMode: 'contain',
   },
   title: {
-    fontSize: 40,
+    fontSize: 60,
     fontWeight: 'bold',
     color: '#D8B4F8',
-    marginBottom: 30,
+    marginBottom: 40,
+
     textShadowColor: '#bab1c4',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 4,
@@ -118,25 +120,33 @@ const styles = StyleSheet.create({
     color: '#2E0854',
     textAlign: 'center',
     marginBottom: 30,
-    marginTop: 20,
+    marginTop: 10,
     fontWeight: '500',
   },
-  input: {
+  codeBox: {
     width: '80%',
-    height: 40,
     backgroundColor: '#fff',
     borderRadius: 30,
-    paddingHorizontal: 16,
-    textAlign: 'center',
+    paddingVertical: 10,
+    paddingHorizontal: 30,
+    marginBottom: 20,
+  },
+  codeText: {
     fontSize: 13,
-    marginBottom: 100,
-    color: '#000',
+    color: '#999',
+    fontWeight: 500,
+    textAlign: 'center',
+  },
+  copyText: {
+    fontSize: 12,
+    color: '#999',
+    marginBottom: 30,
   },
   arrowWrapper: {
     width: '80%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 40,
+    marginBottom: 50,
   },
   arrowButtonLeft: {
     backgroundColor: '#E6E6FA',
@@ -165,10 +175,11 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
   footerText: {
-    fontSize: 12,
+    fontSize: 13,
     color: '#737373',
+    marginRight: 10,
   },
-  login: {
+  share: {
     fontSize: 12,
     fontWeight: 'bold',
     color: '#312218',

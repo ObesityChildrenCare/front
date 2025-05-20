@@ -28,6 +28,15 @@ export default function RootLayout() {
         <Stack.Screen name="login_parent" options={{ headerShown: false }} />
         <Stack.Screen name="signup_name" options={{ headerShown: false }} />
         <Stack.Screen name="signup_phone" options={{ headerShown: false }} />
+        <Stack.Screen name="signup_pw" options={{ headerShown: false }} />
+        <Stack.Screen name="signup_chname" options={{ headerShown: false }} />
+        <Stack.Screen name="signup_agree" options={{ headerShown: false }} />
+        <Stack.Screen name="signup_chinfo" options={{ headerShown: false }} />
+        <Stack.Screen name="signup_lastcode" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="signup_price_agree"
+          options={{ headerShown: false }}
+        />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
       </Stack>
