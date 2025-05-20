@@ -11,16 +11,23 @@ import {
   View,
 } from 'react-native';
 
-export default function SignupPhoneScreen() {
-  const [phone, setPhone] = useState('');
+export default function SignupChnameScreen() {
+  // 여기부터 시작
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
 
   const handleNext = () => {
-    if (!phone.trim()) {
-      alert('전화번호를 입력해주세요.');
+    if (!firstName.trim() || !lastName.trim()) {
+      alert('자녀의 이름을 입력해주세요.');
       return;
     }
+
+    const childName = firstName + lastName;
     // 다음 화면으로 이동
-    router.push('/signup_pw');
+    router.push({
+      pathname: '/signup_agree',
+      params: { childName },
+    });
   };
 
   const handlePrev = () => {
@@ -28,7 +35,7 @@ export default function SignupPhoneScreen() {
   };
 
   const totalDots = 7;
-  const currentIndex = 1; // 현재 활성화된 인덱스
+  const currentIndex = 3; // 현재 활성화된 인덱스
 
   return (
     <LoginBackground>
@@ -40,15 +47,25 @@ export default function SignupPhoneScreen() {
 
         <Text style={styles.title}>DO,IT</Text>
         <Text style={styles.description}>
-          로그인 시 사용할{'\n'} 전화번호를 입력해주세요
+          다음은 <Text style={{ fontWeight: 'bold' }}>소중한 우리 아이</Text>의
+          정보를 입력할 차례!{'\n'}
+          <Text style={{ fontWeight: 'bold' }}>아이의 이름</Text>이 무엇인가요 ?
         </Text>
 
         <TextInput
           style={styles.input}
-          placeholder="010-0000-0000"
+          placeholder="성"
           placeholderTextColor="#999"
-          value={phone}
-          onChangeText={setPhone}
+          value={firstName}
+          onChangeText={setFirstName}
+        />
+
+        <TextInput
+          style={styles.inputCheck}
+          placeholder="이름"
+          placeholderTextColor="#999"
+          value={lastName}
+          onChangeText={setLastName}
         />
 
         <View style={styles.arrowWrapper}>
@@ -118,7 +135,7 @@ const styles = StyleSheet.create({
     color: '#2E0854',
     textAlign: 'center',
     marginBottom: 30,
-    marginTop: 20,
+    marginTop: 25,
     fontWeight: '500',
   },
   input: {
@@ -129,7 +146,18 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     textAlign: 'center',
     fontSize: 13,
-    marginBottom: 100,
+    marginBottom: 15,
+    color: '#000',
+  },
+  inputCheck: {
+    width: '80%',
+    height: 40,
+    backgroundColor: '#fff',
+    borderRadius: 30,
+    paddingHorizontal: 16,
+    textAlign: 'center',
+    fontSize: 13,
+    marginBottom: 60,
     color: '#000',
   },
   arrowWrapper: {
