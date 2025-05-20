@@ -13,7 +13,7 @@ import LoginBackground from '@/components/LoginBackground';
 
 export default function InputFoodMain() {
 
-     const [selected, setSelected] = useState<'meal' | 'snack' | null>(null);
+    const [selected, setSelected] = useState<'meal' | 'snack' | null>(null);
     
     const handleSelect = (option: 'meal' | 'snack') => {
         setSelected(option);
@@ -44,20 +44,16 @@ export default function InputFoodMain() {
                     </Text>
                 </TouchableOpacity>
 
-                <Image
-                    source={require('@/assets/images/heart.png')}
-                    style={styles.heart1}
-                />
-                <Image
-                    source={require('@/assets/images/heart.png')}
-                    style={styles.heart2}
-                />
+                <View style={styles.pandaWrapper}>
+                    {/* 하트 1 */}
+                    <Image source={require('@/assets/images/heart.png')} style={styles.heart1} />
 
-                { /* 판다 이미지 */}
-                <Image
-                    source={require('@/assets/images/smile_panda.png')}
-                    style={styles.panda}
-                />
+                    {/* 판다 */}
+                    <Image source={require('@/assets/images/smile_panda.png')} style={styles.panda} />
+
+                    {/* 하트 2 */}
+                    <Image source={require('@/assets/images/heart.png')} style={styles.heart2} />
+                </View>
 
                 { /* 텍스트 박스 */}
                 <Text style={styles.bigText}>
@@ -172,24 +168,37 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    panda: {
+    pandaWrapper: {
+        position: 'relative', // 하트들이 이 영역 기준으로 absolute 위치
         width: 180,
         height: 180,
-        marginBottom: 2,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
+    panda: {
+        width: '100%',
+        height: '100%',
         resizeMode: 'contain',
     },
+
     heart1: {
         position: 'absolute',
-        top: 150,
-        left: 40,
-        zIndex: 1,
+        top: -10,
+        left: -65,
+        width: 50,
+        height: 50,
+        resizeMode: 'contain',
     },
+
     heart2: {
         position: 'absolute',
-        top: 230,
-        right: 35,
-        zIndex: 1,
-    },
+        bottom: 50,
+        right: -70,
+        width: 50,
+        height: 50,
+        resizeMode: 'contain',
+      },
     bigText: {
         fontSize: 26,
         color: "#2E0854",
