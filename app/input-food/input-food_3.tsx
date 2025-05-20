@@ -6,13 +6,12 @@
 import { router } from 'expo-router';
 import React, { useState } from 'react';
 import {
+    Dimensions,
     Image,
-    SafeAreaView,
     StyleSheet,
     Text,
     TouchableOpacity,
-    View,
-    Dimensions
+    View
 } from 'react-native';
 
 import LoginBackground from '@/components/LoginBackground';
@@ -23,9 +22,9 @@ const screenHeight = Dimensions.get('window').height;
 
 export default function InputFood3() {
 
-    const [selected, setSelected] = useState<'yes' | 'no' |null>(null);
-    
-    const handleSelect = (option: 'yes' | 'no' ) => {
+    const [selected, setSelected] = useState<'yes' | 'no' | null>(null);
+
+    const handleSelect = (option: 'yes' | 'no') => {
         setSelected(option);
     }
 
@@ -57,7 +56,7 @@ export default function InputFood3() {
                 </Text>
             </TouchableOpacity>
 
-            
+
 
             <View style={styles.pandaWrapper}>
 
@@ -67,7 +66,7 @@ export default function InputFood3() {
 
                 {/* 제출한 사진 */}
                 <Image source={require('@/assets/images/TempPicture.jpg')} style={styles.picture} />
-                
+
                 {/* 판다 */}
                 <Image source={require('@/assets/images/head_panda.png')} style={styles.panda} />
 
@@ -79,7 +78,7 @@ export default function InputFood3() {
 
 
 
-            
+
             <View style={styles.selectionContainer}>
                 {/* 아니야 */}
                 <TouchableOpacity
@@ -107,8 +106,8 @@ export default function InputFood3() {
 
             </View>
 
-            
-            
+
+
             { /* 다음 버튼 */}
             <View style={styles.fixedButtonContainer}>
                 <TouchableOpacity onPress={handleBefore} style={styles.arrowButtonLeft}>
@@ -152,7 +151,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingHorizontal: 55,
     },
-      
+
     arrowButtonLeft: {
         backgroundColor: '#E6E6FA',
         borderRadius: 50,
@@ -170,14 +169,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    
+
     pandaWrapper: {
         position: 'absolute',
-        top: 140,
+        top: 110,
         left: 30,
-        flexDirection: 'row', 
-        alignItems: 'center', 
-        padding: 10,      
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 10,
     },
 
     panda: {
@@ -189,7 +188,7 @@ const styles = StyleSheet.create({
 
     background1: {
         position: 'absolute',
-        width: screenWidth-60,
+        width: screenWidth - 60,
         height: 70,
         backgroundColor: 'rgba(215, 215, 240, 0.83)',
         borderRadius: 90,
@@ -223,7 +222,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginLeft: 25,
         zIndex: 10,
-      },
+    },
     selectionContainer: {
         position: 'absolute',
         bottom: 90,

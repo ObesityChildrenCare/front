@@ -46,11 +46,6 @@ export default function LoginScreenChild() {
     router.replace('/home');
   };
 
-  // 선택창으로 진입하기 위한 테스트 함수
-  const testEvent = () => {
-    router.push('/input-food/input-select');
-  }
-
   return (
     <LoginBackground>
       <SafeAreaView style={styles.container}>
@@ -88,7 +83,7 @@ export default function LoginScreenChild() {
         <View style={styles.footer}>
           <Text style={styles.footerText}>암호를 모르겠나요? </Text>
 
-          <TouchableOpacity onPress={testEvent}>
+          <TouchableOpacity>
 
             <Text style={styles.signup}>요청하기</Text>
           </TouchableOpacity>
