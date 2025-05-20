@@ -11,16 +11,27 @@ import {
   View,
 } from 'react-native';
 
-export default function SignupPhoneScreen() {
-  const [phone, setPhone] = useState('');
+export default function SignupPwScreen() {
+  const [pw, setPw] = useState('');
+  const [pwCheck, setPwCheck] = useState('');
 
   const handleNext = () => {
-    if (!phone.trim()) {
-      alert('전화번호를 입력해주세요.');
+    if (!pw.trim()) {
+      alert('비밀번호를 입력해주세요.');
+      return;
+    }
+
+    if (!pwCheck.trim()) {
+      alert('비밀번호를 확인해주세요.');
+      return;
+    }
+
+    if (pw !== pwCheck) {
+      alert('비밀번호가 일치하지 않습니다.');
       return;
     }
     // 다음 화면으로 이동
-    router.push('/signup_pw');
+    router.push('/signup_chname');
   };
 
   const handlePrev = () => {
@@ -28,7 +39,7 @@ export default function SignupPhoneScreen() {
   };
 
   const totalDots = 7;
-  const currentIndex = 1; // 현재 활성화된 인덱스
+  const currentIndex = 2; // 현재 활성화된 인덱스
 
   return (
     <LoginBackground>
@@ -40,15 +51,25 @@ export default function SignupPhoneScreen() {
 
         <Text style={styles.title}>DO,IT</Text>
         <Text style={styles.description}>
-          로그인 시 사용할{'\n'} 전화번호를 입력해주세요
+          좋아요 !{'\n'} 비밀번호를 입력해주세요
         </Text>
 
         <TextInput
           style={styles.input}
-          placeholder="010-0000-0000"
+          placeholder="비밀번호"
           placeholderTextColor="#999"
-          value={phone}
-          onChangeText={setPhone}
+          value={pw}
+          onChangeText={setPw}
+          secureTextEntry={true}
+        />
+
+        <TextInput
+          style={styles.inputCheck}
+          placeholder="비밀번호 확인"
+          placeholderTextColor="#999"
+          value={pwCheck}
+          onChangeText={setPwCheck}
+          secureTextEntry={true}
         />
 
         <View style={styles.arrowWrapper}>
@@ -129,7 +150,18 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     textAlign: 'center',
     fontSize: 13,
-    marginBottom: 100,
+    marginBottom: 15,
+    color: '#000',
+  },
+  inputCheck: {
+    width: '80%',
+    height: 40,
+    backgroundColor: '#fff',
+    borderRadius: 30,
+    paddingHorizontal: 16,
+    textAlign: 'center',
+    fontSize: 13,
+    marginBottom: 60,
     color: '#000',
   },
   arrowWrapper: {

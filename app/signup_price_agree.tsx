@@ -6,21 +6,25 @@ import {
   SafeAreaView,
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
 
-export default function SignupPhoneScreen() {
-  const [phone, setPhone] = useState('');
+export default function SignupPriceAgreeScreen() {
+  const [agree, setAgree] = useState<'yes' | 'no' | null>(null);
 
   const handleNext = () => {
-    if (!phone.trim()) {
-      alert('전화번호를 입력해주세요.');
+    if (!agree) {
+      alert('동의 여부를 선택해주세요.');
+      return;
+    }
+
+    if (agree == 'no') {
+      alert('동의를 하지 않으시면 서비스를 이용하실 수 없습니다.');
       return;
     }
     // 다음 화면으로 이동
-    router.push('/signup_pw');
+    router.push('/signup_lastcode');
   };
 
   const handlePrev = () => {
@@ -28,7 +32,7 @@ export default function SignupPhoneScreen() {
   };
 
   const totalDots = 7;
-  const currentIndex = 1; // 현재 활성화된 인덱스
+  const currentIndex = 6; // 현재 활성화된 인덱스
 
   return (
     <LoginBackground>
@@ -40,16 +44,30 @@ export default function SignupPhoneScreen() {
 
         <Text style={styles.title}>DO,IT</Text>
         <Text style={styles.description}>
-          로그인 시 사용할{'\n'} 전화번호를 입력해주세요
+          아이가 목표 운동량에 달성할 경우,
+          {'\n'}
+          <Text style={{ fontWeight: 'bold' }}>현금성 보상</Text> 을 지급하실 수
+          있습니다.
+          {'\n\n'}이 방법에 대해서 동의하시나요?
         </Text>
 
-        <TextInput
-          style={styles.input}
-          placeholder="010-0000-0000"
-          placeholderTextColor="#999"
-          value={phone}
-          onChangeText={setPhone}
-        />
+        <View style={styles.radioContainer}>
+          <TouchableOpacity
+            style={styles.radioOption}
+            onPress={() => setAgree('yes')}
+          >
+            <Text style={styles.radioDot}>{agree === 'yes' ? '●' : '○'}</Text>
+            <Text style={styles.radioText}>예</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.radioOption}
+            onPress={() => setAgree('no')}
+          >
+            <Text style={styles.radioDot}>{agree === 'no' ? '●' : '○'}</Text>
+            <Text style={styles.radioText}>아니오</Text>
+          </TouchableOpacity>
+        </View>
 
         <View style={styles.arrowWrapper}>
           <TouchableOpacity style={styles.arrowButtonLeft} onPress={handlePrev}>
@@ -118,25 +136,35 @@ const styles = StyleSheet.create({
     color: '#2E0854',
     textAlign: 'center',
     marginBottom: 30,
-    marginTop: 20,
+    marginTop: 25,
     fontWeight: '500',
   },
-  input: {
-    width: '80%',
-    height: 40,
-    backgroundColor: '#fff',
-    borderRadius: 30,
-    paddingHorizontal: 16,
-    textAlign: 'center',
-    fontSize: 13,
-    marginBottom: 100,
+  radioContainer: {
+    flexDirection: 'row',
+    gap: 30,
+    marginBottom: 40,
+    marginTop: 20,
+  },
+  radioOption: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 15,
+  },
+  radioDot: {
+    fontSize: 16,
     color: '#000',
+    marginRight: 6,
+  },
+  radioText: {
+    fontSize: 16,
+    color: '#2E0854',
+    fontWeight: '500',
   },
   arrowWrapper: {
     width: '80%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 40,
+    marginBottom: 50,
   },
   arrowButtonLeft: {
     backgroundColor: '#E6E6FA',

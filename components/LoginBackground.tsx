@@ -1,6 +1,6 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { ReactNode } from 'react';
-import { StyleSheet } from 'react-native';
+import { Keyboard, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 
 interface Props {
   children: ReactNode;
@@ -8,9 +8,11 @@ interface Props {
 
 export default function GradientBackground({ children }: Props) {
   return (
-    <LinearGradient colors={['#ECD6FF', '#ffffff']} style={styles.background}>
-      {children}
-    </LinearGradient>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <LinearGradient colors={['#ECD6FF', '#ffffff']} style={styles.background}>
+        {children}
+      </LinearGradient>
+    </TouchableWithoutFeedback>
   );
 }
 
