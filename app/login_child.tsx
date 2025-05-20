@@ -25,8 +25,7 @@ export default function LoginScreenChild() {
     setIsParent(next);
 
     setTimeout(() => {
-      //router.replace(next ? '/login_parent' : '/login_child');
-      router.push('/input-food/input-food_main');
+      router.replace(next ? '/login_parent' : '/login_child');
     }, 0);
   };
 
@@ -46,6 +45,11 @@ export default function LoginScreenChild() {
     // 예: 로그인 성공 시 홈 탭으로 이동
     router.replace('/home');
   };
+
+  // 선택창으로 진입하기 위한 테스트 함수
+  const testEvent = () => {
+    router.push('/input-food/input-main');
+  }
 
   return (
     <LoginBackground>
@@ -83,7 +87,9 @@ export default function LoginScreenChild() {
 
         <View style={styles.footer}>
           <Text style={styles.footerText}>암호를 모르겠나요? </Text>
-          <TouchableOpacity>
+
+          <TouchableOpacity onPress={testEvent}>
+
             <Text style={styles.signup}>요청하기</Text>
           </TouchableOpacity>
         </View>

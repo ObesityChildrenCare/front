@@ -1,3 +1,8 @@
+/*
+
+   먹은것과 운동중에 무엇을 기록하고 싶은지 선택하는 창
+
+*/
 import { router } from 'expo-router';
 import React, { useState } from 'react';
 import {
@@ -17,16 +22,21 @@ export default function InputFoodMain() {
     const handleSelect = (option: 'food' | 'exercise') => {
         setSelected(option);
     };
-    
-    // 메인화면으로 가기 함수
+
+    // 뒤로가기
     const handleBack = () => {
-        router.replace('/login_child');  // 메인 화면 구현 되면 거기로 이동
+        router.back();
     }
 
 
     // 다음 버튼 함수
     const handleNext = () => {
-        router.push("/input-food/input-food_page1");
+        if (selected === 'food') {
+            router.push('/input-food/input-food_1');
+        } else if (selected === 'exercise') {
+            router.push('/input-food/input-exer_1');
+        } else {
+        }
     }
 
     return (
@@ -54,7 +64,7 @@ export default function InputFoodMain() {
                     무엇을 기록하고 싶어?
                 </Text>
 
-                
+
 
                 {/* 먹방 선택 */}
                 <TouchableOpacity
@@ -71,8 +81,6 @@ export default function InputFoodMain() {
                     </Text>
 
                 </TouchableOpacity>
-
-                
 
                 {/* 운동 선택 */}
                 <TouchableOpacity
@@ -91,17 +99,16 @@ export default function InputFoodMain() {
 
                 </TouchableOpacity>
 
-                
-                { /* 다음 버튼 */}
-                <View style={styles.arrowWrapper}>
-                    <TouchableOpacity onPress={handleNext} style={styles.arrowButtonRight}>
-                        <Text style={styles.arrow}>{'\u2192'}</Text>
-                    </TouchableOpacity>
-                </View>
-
-
 
             </SafeAreaView>
+
+            { /* 다음 버튼 */}
+            <View style={styles.fixedButtonContainer}>
+                <TouchableOpacity onPress={handleNext} style={styles.arrowButtonRight}>
+                    <Text style={styles.arrow}>{'\u2192'}</Text>
+                </TouchableOpacity>
+            </View>
+
         </LoginBackground>
     );
 }
@@ -131,13 +138,15 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
         marginTop: 60,
     },
-    arrowButtonLeft: {
+    fixedButtonContainer: {
         position: 'absolute',
-        top: 25,
-        left: 30,
-        fontSize: 30,
-        zIndex: 1,
+        bottom: 50,
+        right: 55,
+        alignItems: 'flex-end',
+        width: '100%',
+    },
 
+    arrowButtonLeft: {
         backgroundColor: '#E6E6FA',
         borderRadius: 50,
         width: 83,
@@ -145,13 +154,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    arrowButtonRight: {
-        position: 'absolute',
-        top: 25,
-        right: 30,
-        fontSize: 30,
-        zIndex: 1,
 
+    arrowButtonRight: {
         backgroundColor: '#D8B4F8',
         borderRadius: 50,
         width: 83,
@@ -194,13 +198,13 @@ const styles = StyleSheet.create({
 
     selectBoxSelected: {
         backgroundColor: '#9BCC97',
-        shadowColor: '#D8B4F8',      // 💡 연보라 glow
+        shadowColor: '#D8B4F8',
         shadowOffset: { width: 0, height: 0 },
         shadowOpacity: 0.6,
         shadowRadius: 12,
-        elevation: 10,               // ✅ Android 그림자
-      },
-      
+        elevation: 10,
+    },
+
     selectBoxText: {
         textAlign: 'center',
         fontSize: 18,

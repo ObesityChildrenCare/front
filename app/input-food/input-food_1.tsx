@@ -1,3 +1,8 @@
+/*
+
+   밥과 간식중에 뭘 먹었는지 선택하는 창
+
+*/
 import { router } from 'expo-router';
 import React, { useState } from 'react';
 import {
@@ -19,9 +24,9 @@ export default function InputFoodMain() {
         setSelected(option);
     };
 
-    // 메인화면으로 가기 함수
+    // 뒤로가기
     const handleBack = () => {
-        router.replace('/login_child');  // 메인 화면 구현 되면 거기로 이동
+        router.back();
     }
 
     // 이전 버튼 함수
@@ -30,7 +35,12 @@ export default function InputFoodMain() {
     }
     // 다음 버튼 함수
     const handleNext = () => {
-        //router.push("/input-food/input-food_page1");
+            if (selected === 'meal') {
+                router.push('/input-food/input-food_2');
+            } else if (selected === 'snack') {
+                router.push('/input-food/input-food_2');
+            } else {
+        }
     }
 
     return (
@@ -96,21 +106,20 @@ export default function InputFoodMain() {
 
                 </TouchableOpacity>
 
-                
-
-                { /* 다음 버튼 */}
-                <View style={styles.arrowWrapper}>
-                    <TouchableOpacity onPress={handleBefore} style={styles.arrowButtonLeft}>
-                        <Text style={styles.arrow}>{'\u2190'}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={handleNext} style={styles.arrowButtonRight}>
-                        <Text style={styles.arrow}>{'\u2192'}</Text>
-                    </TouchableOpacity>
-                </View>
-
 
 
             </SafeAreaView>
+
+            { /* 다음 버튼 */}
+            <View style={styles.fixedButtonContainer}>
+                <TouchableOpacity onPress={handleBefore} style={styles.arrowButtonLeft}>
+                    <Text style={styles.arrow}>{'\u2190'}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={handleNext} style={styles.arrowButtonRight}>
+                    <Text style={styles.arrow}>{'\u2192'}</Text>
+                </TouchableOpacity>
+            </View>
+            
         </LoginBackground>
     );
 }
@@ -140,13 +149,17 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
         marginTop: 60,
     },
-    arrowButtonLeft: {
+    fixedButtonContainer: {
         position: 'absolute',
-        top: 25,
-        left: 30,
-        fontSize: 30,
-        zIndex: 1,
+        bottom: 50,
+        left: 0,
+        right: 0,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingHorizontal: 55,
+    },
 
+    arrowButtonLeft: {
         backgroundColor: '#E6E6FA',
         borderRadius: 50,
         width: 83,
@@ -154,13 +167,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    arrowButtonRight: {
-        position: 'absolute',
-        top: 25,
-        right: 30,
-        fontSize: 30,
-        zIndex: 1,
 
+    arrowButtonRight: {
         backgroundColor: '#D8B4F8',
         borderRadius: 50,
         width: 83,
@@ -169,7 +177,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     pandaWrapper: {
-        position: 'relative', // 하트들이 이 영역 기준으로 absolute 위치
+        position: 'relative',
         width: 180,
         height: 180,
         alignItems: 'center',
@@ -228,11 +236,11 @@ const styles = StyleSheet.create({
 
     selectBoxSelected: {
         backgroundColor: '#D8B4F8',
-        shadowColor: '#D8B4F8',      // 💡 연보라 glow
+        shadowColor: '#D8B4F8',  
         shadowOffset: { width: 0, height: 0 },
         shadowOpacity: 0.6,
         shadowRadius: 12,
-        elevation: 10,               // ✅ Android 그림자
+        elevation: 10,   
     },
 
     selectBoxText: {
