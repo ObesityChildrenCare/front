@@ -25,7 +25,8 @@ export default function LoginScreenChild() {
     setIsParent(next);
 
     setTimeout(() => {
-      router.replace(next ? '/login_parent' : '/login_child');
+      //router.replace(next ? '/login_parent' : '/login_child');
+      router.replace('/input-food/input-food_main');
     }, 0);
   };
 
