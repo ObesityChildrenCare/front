@@ -9,7 +9,7 @@ interface Props {
 export default function GradientBackground({ children }: Props) {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <LinearGradient colors={['#ECD6FF', '#ffffff']} style={styles.background}>
+      <LinearGradient colors={['#ECD9FF', '#ffffff']} style={styles.background}>
         {children}
       </LinearGradient>
     </TouchableWithoutFeedback>

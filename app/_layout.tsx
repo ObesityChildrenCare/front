@@ -33,6 +33,10 @@ export default function RootLayout() {
         <Stack.Screen name="signup_agree" options={{ headerShown: false }} />
         <Stack.Screen name="signup_chinfo" options={{ headerShown: false }} />
         <Stack.Screen name="signup_lastcode" options={{ headerShown: false }} />
+        <Stack.Screen name="family_main" options={{ headerShown: false }} />
+        <Stack.Screen name="family_ranking" options={{ headerShown: false }} />
+        <Stack.Screen name="kids_main" options={{ headerShown: false }} />
+        <Stack.Screen name="bamboo_bank" options={{ headerShown: false }} />
         <Stack.Screen
           name="signup_price_agree"
           options={{ headerShown: false }}
