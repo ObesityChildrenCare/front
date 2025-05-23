@@ -16,6 +16,7 @@ import {
 } from 'react-native';
 
 import LoginBackground from '@/components/LoginBackground';
+import BackButton from '@/components/BackButton';
 
 export default function InputSelect() {
 
@@ -24,11 +25,6 @@ export default function InputSelect() {
     const handleSelect = (option: 'food' | 'exercise') => {
         setSelected(option);
     };
-
-    // 뒤로가기
-    const handleBack = () => {
-        router.replace('/login_child');
-    }
 
     // 다음 버튼 함수
     const handleNext = () => {
@@ -43,15 +39,9 @@ export default function InputSelect() {
     return (
         <LoginBackground>
             { /* 뒤로가기 버튼 */}
-            <TouchableOpacity onPress={handleBack} style={styles.backArrow}>
-                <Text style={styles.arrowText}>
-                    {'\u2190'}
-                </Text>
-            </TouchableOpacity>
+            <BackButton onPress={() => router.replace('/kids_main')} />
 
             <SafeAreaView style={styles.container}>
-
-
 
                 { /* 판다 이미지 */}
                 <Image
@@ -124,15 +114,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 24,
         marginTop: 130,
         marginBottom: -10,
-    },
-    backArrow: {
-        position: 'absolute',
-        top: 50,
-        left: 20,
-    },
-    arrowText: {
-        fontSize: 30,
-        color: '#2E0854',
     },
     arrow: {
         fontSize: 24,

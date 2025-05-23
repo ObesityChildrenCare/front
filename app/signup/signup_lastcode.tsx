@@ -28,7 +28,7 @@ export default function SignupLastcodeScreen() {
   const handleNext = () => {
     // 홈으로 이동
     alert('홈으로 이동합니다');
-    router.push('/login_child');
+    router.push('/family_main');
   };
 
   const share = () => {

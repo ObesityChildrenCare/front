@@ -1,4 +1,5 @@
 import LoginBackground from '@/components/LoginBackground';
+import BackButton from '@/components/BackButton';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import {
@@ -15,27 +16,20 @@ export default function RankingScreen() {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled((prev) => !prev);
 
-  const handlePrev = () => {
-    router.back();
-  };
-
   return (
     <LoginBackground>
+
+      <BackButton />
+      <View style={styles.header}>
+        <Switch
+          trackColor={{ false: '#ccc', true: '#D8B4F8' }}
+          thumbColor={isEnabled ? '#fff' : '#f4f3f4'}
+          onValueChange={toggleSwitch}
+          value={isEnabled}
+        />
+      </View>
       <SafeAreaView style={styles.container}>
-        <View style={styles.header}>
-          <TouchableOpacity style={styles.headerPrev} onPress={handlePrev}>
-            {/*뒤로가기 이미지에서 벡터기반 텍스트로 수정*/}
-            <Text style={styles.arrowText}>
-              {'\u2190'}
-            </Text>
-          </TouchableOpacity>
-          <Switch
-            trackColor={{ false: '#ccc', true: '#D8B4F8' }}
-            thumbColor={isEnabled ? '#fff' : '#f4f3f4'}
-            onValueChange={toggleSwitch}
-            value={isEnabled}
-          />
-        </View>
+
 
         <View style={styles.imageContainer}>
           <Image
@@ -120,8 +114,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 24,
-    justifyContent: 'center',
-    paddingTop: 12,
+    justifyContent: 'flex-start',
+    paddingTop: 30,
     paddingBottom: 30,
   },
   backArrow: {
@@ -136,11 +130,11 @@ const styles = StyleSheet.create({
 
   header: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     alignItems: 'center',
-    marginBottom: 16,
+    marginBottom: 0,
     paddingHorizontal: 20,
-    paddingTop: 30,
+    paddingTop: 50,
   },
   headerPrev: {
     width: 40,

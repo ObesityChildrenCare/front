@@ -1,6 +1,6 @@
 /*
 
-   사진을 어떻게 불러올건지, 찍을건지, 없는지 선택하는 창
+   무슨 운동을 했는지 선택하는 창
 
 */
 import { router } from 'expo-router';
@@ -16,13 +16,9 @@ import {
 } from 'react-native';
 
 import LoginBackground from '@/components/LoginBackground';
+import BackButton from '@/components/BackButton';
 
 export default function InputExer2() {
-
-    // 뒤로가기
-    const handleBack = () => {
-        router.back();
-    }
 
     // 이전 버튼 함수
     const handleBefore = () => {
@@ -30,18 +26,24 @@ export default function InputExer2() {
     }
     // 다음 버튼 함수
     const handleNext = () => {
-        router.push('/input-food/input-exer_3')
-    }
+        if (customExercise.trim()) {
+            router.push({
+                pathname: '/input-food/input-exer_3',
+                params: { exercise: customExercise },
+            });
+        } else {
+            alert('운동 이름을 입력해줘줘!');
+        }
+      };
+
+    // 운동 이름 적는 변수
+    const [customExercise, setCustomExercise] = useState('');
 
     return (
         <LoginBackground>
 
             { /* 뒤로가기 버튼 */}
-            <TouchableOpacity onPress={handleBack} style={styles.backArrow}>
-                <Text style={styles.arrowText}>
-                    {'\u2190'}
-                </Text>
-            </TouchableOpacity>
+            <BackButton />
 
             <SafeAreaView style={styles.container}>
 
@@ -68,6 +70,8 @@ export default function InputExer2() {
                     style={[styles.selectBox, { backgroundColor: '#FFFFFF', textAlign: 'center', fontSize: 16 }]}
                     placeholder="운동 이름을 적어줘!"
                     placeholderTextColor="rgba(115, 115, 115, 1)"
+                    value={customExercise}
+                    onChangeText={setCustomExercise}
                 />
 
 
@@ -94,15 +98,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 24,
         marginTop: 130,
         marginBottom: -10,
-    },
-    backArrow: {
-        position: 'absolute',
-        top: 50,
-        left: 20,
-    },
-    arrowText: {
-        fontSize: 30,
-        color: '#2E0854',
     },
     arrow: {
         fontSize: 24,
