@@ -49,7 +49,7 @@ export default function InputFood7() {
 
             {/* 오른쪽 위 작은 대나무 아이콘 */}
             <TouchableOpacity>
-                <Image source={require('@/assets/images/minibamboo.png')} style={styles.minibamboo} />
+                <Image source={require('@/assets/images/bamboo_icon.png')} style={styles.minibamboo} />
             </TouchableOpacity>
 
 
@@ -64,7 +64,7 @@ export default function InputFood7() {
                 </Text>
 
                 {/* 대나무 */}
-                <Image source={require('@/assets/images/bamboo.png')} style={styles.bamboo} />
+                <Image source={require('@/assets/images/bamboo_big.png')} style={styles.bamboo} />
 
                 { /* 텍스트 박스 */}
                 <Text style={styles.normalText}>

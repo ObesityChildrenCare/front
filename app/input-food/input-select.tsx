@@ -1,6 +1,6 @@
 /*
-
-   먹은것과 운동중에 무엇을 기록하고 싶은지 선택하는 창
+    [ 기록 선택 메인 ]
+    먹은것과 운동중에 무엇을 기록하고 싶은지 선택하는 창
 
 */
 import { router,} from 'expo-router';
@@ -19,6 +19,7 @@ import LoginBackground from '@/components/LoginBackground';
 
 export default function InputSelect() {
 
+    // 음식과 운동중에 뭘 선택했는지 저장
     const [selected, setSelected] = useState<'food' | 'exercise' | null>(null);
     const handleSelect = (option: 'food' | 'exercise') => {
         setSelected(option);

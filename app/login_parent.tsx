@@ -49,7 +49,7 @@ export default function LoginScreenParent() {
   };
 
   const routerSignup = () => {
-    router.push('/signup_name');
+    router.push('/signup/signup_name');
   };
 
   return (

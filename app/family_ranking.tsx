@@ -24,7 +24,10 @@ export default function RankingScreen() {
       <SafeAreaView style={styles.container}>
         <View style={styles.header}>
           <TouchableOpacity style={styles.headerPrev} onPress={handlePrev}>
-            <Image source={require('@/assets/images/prev_key.png')}></Image>
+            {/*뒤로가기 이미지에서 벡터기반 텍스트로 수정*/}
+            <Text style={styles.arrowText}>
+              {'\u2190'}
+            </Text>
           </TouchableOpacity>
           <Switch
             trackColor={{ false: '#ccc', true: '#D8B4F8' }}
@@ -73,7 +76,7 @@ export default function RankingScreen() {
               <View style={styles.barFillWin} />
               <Image
                 style={[styles.barIconPanda]}
-                source={require('@/assets/images/surprised_panda.png')}
+                source={require('@/assets/images/surprised_panda_big.png')}
               />
               <Image
                 style={[styles.barIconPin]}
@@ -86,7 +89,7 @@ export default function RankingScreen() {
               <View style={[styles.barFillRest, { width: '30%' }]} />
               <Image
                 style={[styles.barIconPanda]}
-                source={require('@/assets/images/surprised_panda.png')}
+                source={require('@/assets/images/surprised_panda_big.png')}
               />
               <Image
                 style={[styles.barIconPin]}
@@ -99,7 +102,7 @@ export default function RankingScreen() {
               <View style={[styles.barFillRest, { width: '15%' }]} />
               <Image
                 style={[styles.barIconPanda]}
-                source={require('@/assets/images/surprised_panda.png')}
+                source={require('@/assets/images/surprised_panda_big.png')}
               />
               <Image
                 style={[styles.barIconPin]}
@@ -121,6 +124,12 @@ const styles = StyleSheet.create({
     paddingTop: 12,
     paddingBottom: 30,
   },
+
+  arrowText: {
+    fontSize: 30,
+    color: '#2E0854',
+  },
+
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -264,8 +273,11 @@ const styles = StyleSheet.create({
   },
 
   barIconPin: {
+    width: 30,
+    height: 52,
+    resizeMode: 'contain',
     position: 'absolute',
-    left: '88%',
+    left: '92%',
     top: -18,
     fontSize: 14,
     zIndex: 2,

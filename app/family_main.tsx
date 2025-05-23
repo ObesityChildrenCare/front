@@ -87,17 +87,17 @@ export default function MainScreen() {
               />
               <Image
                 style={[styles.barIconGift]}
-                source={require('@/assets/images/gift.png')}
+                source={require('@/assets/images/giftbox1.png')}
               />
             </View>
           </View>
 
           <View style={styles.rewardsRow}>
             <TouchableOpacity style={styles.rewardBox} onPress={handleKidsHome}>
-              <Image source={require('@/assets/images/surprised_panda.png')} />
+              <Image source={require('@/assets/images/surprised_panda_big.png')} style={styles.buttonIcon} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.rewardBox} onPress={handleRankHome}>
-              <Image source={require('@/assets/images/prize.png')} />
+              <Image source={require('@/assets/images/prize.png')} style={styles.buttonIcon} />
             </TouchableOpacity>
           </View>
         </View>
@@ -236,14 +236,18 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: -14,
     left: '45%',
-    fontSize: 14,
+    width: 30,
+    height: 30,
+    resizeMode: 'contain',
     zIndex: 2,
   },
   barIconGift: {
     position: 'absolute',
-    top: -18,
-    left: '94%',
-    fontSize: 14,
+    top: -15,
+    left: '95%',
+    width: 30,
+    height: 30,
+    resizeMode: 'contain',
     zIndex: 2,
   },
 
@@ -277,5 +281,11 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     elevation: 2,
     position: 'relative',
+  },
+  buttonIcon: {
+    width: 60,
+    height: 60,
+    resizeMode: 'contain',
+    zIndex: 2,
   },
 });

@@ -32,7 +32,7 @@ export default function InputExer3() {
         router.push({
             pathname: '/input-food/input-exer_4',
             params: { exerCount: String(exerCount) }, // toString() 또는 String() 꼭 필요
-          });
+        });
     }
 
     const [exerCount, setExerCount] = useState(0);
@@ -62,7 +62,7 @@ export default function InputExer3() {
                     <Image source={require('@/assets/images/readingglasses.png')} style={styles.pencil} />
 
                     {/* 판다 */}
-                    <Image source={require('@/assets/images/sup_panda.png')} style={styles.panda} />
+                    <Image source={require('@/assets/images/surprised_panda_big.png')} style={styles.panda} />
                 </View>
 
                 { /* 텍스트 박스 */}
@@ -81,18 +81,18 @@ export default function InputExer3() {
                 </Text>
 
 
-<View style={styles.selectionContainer}>
-                {/* 플러스 */}
-                <TouchableOpacity style={styles.selectBox2} onPress={increaseCount}>
-                    <Text style={styles.selectBoxText}>+</Text>
-                </TouchableOpacity>
-                {/* 마이너스 */}
-                <TouchableOpacity style={styles.selectBox} onPress={decreaseCount}>
-                    <Text style={styles.selectBoxText}>-</Text>
-                </TouchableOpacity>
+                <View style={styles.selectionContainer}>
+                    {/* 플러스 */}
+                    <TouchableOpacity style={styles.selectBox2} onPress={increaseCount}>
+                        <Text style={styles.selectBoxText}>+</Text>
+                    </TouchableOpacity>
+                    {/* 마이너스 */}
+                    <TouchableOpacity style={styles.selectBox} onPress={decreaseCount}>
+                        <Text style={styles.selectBoxText}>-</Text>
+                    </TouchableOpacity>
 
 
-            </View>
+                </View>
 
                 {/*운동 시간 제출 버튼 */}
                 <TouchableOpacity onPress={(handleNext)}

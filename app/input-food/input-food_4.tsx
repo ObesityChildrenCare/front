@@ -74,7 +74,7 @@ export default function InputFood4() {
                     <Image source={require('@/assets/images/star.png')} style={styles.star} />
 
                     {/* 판다 */}
-                    <Image source={require('@/assets/images/sup_panda.png')} style={styles.panda} />
+                    <Image source={require('@/assets/images/surprised_panda_big.png')} style={styles.panda} />
                 </View>
 
                 { /* 텍스트 박스 */}

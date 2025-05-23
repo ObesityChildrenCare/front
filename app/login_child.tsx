@@ -43,12 +43,16 @@ export default function LoginScreenChild() {
     console.log('로그인 완료!');
 
     // 예: 로그인 성공 시 홈 탭으로 이동
-    // router.replace('/family_main');
+    router.replace('/family_main');
   };
 
   const requestNum = () => {
     alert('요청 메세지를 전송했어요!');
   };
+
+  const tempFunction = () => {
+    router.push('/input-food/input-select');
+  }
 
   return (
     <LoginBackground>
@@ -87,7 +91,7 @@ export default function LoginScreenChild() {
         <View style={styles.footer}>
           <Text style={styles.footerText}>암호를 모르겠나요? </Text>
 
-          <TouchableOpacity>
+          <TouchableOpacity onPress = {tempFunction}>
 
             <Text style={styles.signup}>요청하기</Text>
           </TouchableOpacity>
