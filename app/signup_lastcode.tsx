@@ -26,11 +26,13 @@ export default function SignupLastcodeScreen() {
   const code = generateRandomCode();
 
   const handleNext = () => {
-    // 다음 화면으로 이동
-    // router.push('/home');
+    // 홈으로 이동
+    alert('홈으로 이동합니다');
+    router.push('/home');
   };
 
   const share = () => {
+    alert('코드를 전송하였습니다');
     // 공유하기 버튼 누르면
   };
 

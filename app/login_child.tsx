@@ -43,7 +43,11 @@ export default function LoginScreenChild() {
     console.log('로그인 완료!');
 
     // 예: 로그인 성공 시 홈 탭으로 이동
-    router.replace('/home');
+    // router.replace('/family_main');
+  };
+
+  const requestNum = () => {
+    alert('요청 메세지를 전송했어요!');
   };
 
   return (
