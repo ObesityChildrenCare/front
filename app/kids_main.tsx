@@ -32,15 +32,20 @@ export default function MainScreen() {
 
   return (
     <LoginBackground>
+
+
       <SafeAreaView style={styles.container}>
-        <View style={styles.header}>
-          <TouchableOpacity style={styles.headerPrev} onPress={handlePrev}>
-            <Image source={require('@/assets/images/prev_key.png')}></Image>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={handleBambooBank} style={styles.bamboo}>
-            <Image source={require('@/assets/images/bamboo.png')} />
-          </TouchableOpacity>
-        </View>
+
+        { /* 뒤로가기 버튼 */}
+        <TouchableOpacity onPress={handlePrev} style={styles.backArrow}>
+          <Text style={styles.arrowText}>
+            {'\u2190'}
+          </Text>
+        </TouchableOpacity>
+        {/* 오른쪽 위 작은 대나무 아이콘 */}
+        <TouchableOpacity onPress={handleBambooBank} style={styles.minibamboo}>
+          <Image source={require('@/assets/images/bamboo_icon.png')} style={styles.minibamboo} />
+        </TouchableOpacity>
 
         <Text
           style={{
@@ -92,26 +97,26 @@ export default function MainScreen() {
               <View style={[styles.marker, { left: '100%' }]} />
               <Image
                 style={[styles.barIconPuzzle]}
-                source={require('@/assets/images/yellow_puzzle.png')}
+                source={require('@/assets/images/yellow_puzzle_big.png')}
               />
               <Image
                 style={[styles.barIconGift]}
-                source={require('@/assets/images/gift.png')}
+                source={require('@/assets/images/giftbox1.png')}
               />
             </View>
           </View>
 
           <View style={styles.rewardsRow}>
             <TouchableOpacity style={styles.rewardBox}>
-              <Image source={require('@/assets/images/pencil.png')} />
+              <Image source={require('@/assets/images/pencil.png')} style={styles.buttonIcon} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.rewardBox}>
               <Image
-                source={require('@/assets/images/yellow_puzzle_big.png')}
+                source={require('@/assets/images/yellow_puzzle_big.png')} style={styles.buttonIcon}
               />
             </TouchableOpacity>
             <TouchableOpacity style={styles.rewardBox} onPress={handleRankHome}>
-              <Image source={require('@/assets/images/prize.png')} />
+              <Image source={require('@/assets/images/prize.png')} style={styles.buttonIcon} />
             </TouchableOpacity>
           </View>
         </View>
@@ -124,7 +129,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 24,
-    paddingTop: 12,
+    paddingTop: 100,
+  },
+  backArrow: {
+    position: 'absolute',
+    top: 50,
+    left: 35,
+  },
+  arrowText: {
+    fontSize: 30,
+    color: '#2E0854',
   },
   header: {
     flexDirection: 'row',
@@ -138,19 +152,6 @@ const styles = StyleSheet.create({
     width: 40,
     height: 35,
   },
-  bamboo: {
-    width: 50,
-    height: 50,
-    borderRadius: 200,
-    paddingHorizontal: 5,
-    paddingTop: 3,
-    backgroundColor: '#E6E6FA',
-
-    shadowColor: '#000',
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 0.16,
-    shadowRadius: 8,
-  },
   imageContainer: {
     // 🟣 수정: 버튼 겹치기 위해 absolute 위치 기반 부모 뷰 추가
     position: 'relative',
@@ -160,19 +161,20 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     marginHorizontal: 20,
     borderRadius: 10,
-    paddingHorizontal: 80,
-    paddingVertical: 25,
+    alignSelf: 'center',
 
     shadowColor: '#868284',
     shadowOffset: { width: 2, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 4,
+
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   houseImage: {
     width: 200,
     height: 200,
     resizeMode: 'contain',
-    marginBottom: 12,
   },
   editButton: {
     position: 'absolute', // 🟣 수정: 이미지 위에 겹치기 위해 position absolute 사용
@@ -274,14 +276,18 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: -14,
     left: '45%',
-    fontSize: 14,
+    width: 30,
+    height: 30,
+    resizeMode: 'contain',
     zIndex: 2,
   },
   barIconGift: {
     position: 'absolute',
-    top: -18,
-    left: '94%',
-    fontSize: 14,
+    top: -15,
+    left: '95%',
+    width: 30,
+    height: 30,
+    resizeMode: 'contain',
     zIndex: 2,
   },
 
@@ -315,5 +321,21 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     elevation: 2,
     position: 'relative',
+  },
+  buttonIcon: {
+    width: 60,
+    height: 60,
+    resizeMode: 'contain',
+    zIndex: 2,
+  },
+
+  minibamboo: {
+    position: 'absolute',
+    top: 25,
+    right: 15,
+    width: 50,
+    height: 50,
+    resizeMode: 'contain',
+    zIndex: 5,
   },
 });
