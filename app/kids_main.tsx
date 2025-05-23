@@ -1,5 +1,5 @@
-import LoginBackground from '@/components/LoginBackground';
 import BackButton from '@/components/BackButton';
+import LoginBackground from '@/components/LoginBackground';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import {
@@ -106,7 +106,7 @@ export default function MainScreen() {
           </View>
 
           <View style={styles.rewardsRow}>
-            <TouchableOpacity style={styles.rewardBox} onPress ={handleInputSelect}>
+            <TouchableOpacity style={styles.rewardBox} onPress={handleInputSelect}>
               <Image source={require('@/assets/images/pencil.png')} style={styles.buttonIcon} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.rewardBox}>
@@ -331,7 +331,7 @@ const styles = StyleSheet.create({
 
   minibamboo: {
     position: 'absolute',
-    top: 25,
+    top: 20,
     right: 15,
     width: 50,
     height: 50,
