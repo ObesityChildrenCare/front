@@ -3,7 +3,7 @@
    운동을 얼마나 했는지 입력하는 창
 
 */
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
 import {
     Image,
@@ -19,6 +19,10 @@ import BackButton from '@/components/BackButton';
 
 export default function InputExer3() {
 
+    //1페이지에서 받은거 다시 넘기기
+    const params = useLocalSearchParams();
+    const exercise = typeof params.exercise === 'string' ? params.exercise : '';
+
     // 이전 버튼 함수
     const handleBefore = () => {
         router.back();
@@ -27,9 +31,11 @@ export default function InputExer3() {
     const handleNext = () => {
         router.push({
             pathname: '/input-food/input-exer_4',
-            params: { exerCount: String(exerCount) }, // toString() 또는 String() 꼭 필요
+            params: { exerCount: String(exerCount), exercise: exercise },
         });
     }
+
+
 
     const [exerCount, setExerCount] = useState(0);
 

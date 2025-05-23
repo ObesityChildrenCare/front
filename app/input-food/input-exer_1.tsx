@@ -19,86 +19,66 @@ import LoginBackground from '@/components/LoginBackground';
 import BackButton from '@/components/BackButton';
 
 export default function InputExer1() {
+    const [selected, setSelected] = useState<string | null>(null);
 
-    const [selected, setSelected] = useState<'sel1' | 'sel2' | 'sel3' | 'sel4' | 'sel5' | 'sel6' | 'sel7' | 'sel8' | 'sel9' | null>(null);
+    const handleSelect = (label: string) => {
+        setSelected(label);
 
-    const handleSelect = (option: typeof selected) => {
-        setSelected(option);
-
-        if (option === 'sel9') {
+        if (label === '여기 없어') {
             router.push('/input-food/input-exer_2');
         } else {
-            router.push('/input-food/input-exer_3');
+            router.push({
+                pathname: '/input-food/input-exer_3',
+                params: { exercise: label },
+            });
+            console.log('선택한 운동:', label);
         }
     };
 
     return (
         <LoginBackground>
-
-            { /* 뒤로가기 버튼 */}
+            {/* 뒤로가기 버튼 */}
             <BackButton />
 
             <SafeAreaView style={styles.container}>
-
-
                 <View style={styles.pandaWrapper}>
-
                     {/* 돋보기 */}
                     <Image source={require('@/assets/images/readingglasses.png')} style={styles.readingglasses} />
-                    
                     {/* 판다 */}
                     <Image source={require('@/assets/images/surprised_panda_big.png')} style={styles.panda} />
                 </View>
 
-                { /* 텍스트 박스 */}
-                <Text style={styles.normalText}>
-                    오늘은 어떤 운동을 했어?
-                </Text>
+                {/* 텍스트 박스 */}
+                <Text style={styles.normalText}>오늘은 어떤 운동을 했어?</Text>
 
                 <View style={styles.gridContainer}>
-                    <TouchableOpacity onPress={() => handleSelect('sel1')} style={[styles.selectBox, selected === 'sel1' && styles.selectBoxSelected]}>
-                        <Text style={styles.selectBoxText}>수영</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={() => handleSelect('sel2')} style={[styles.selectBox, selected === 'sel2' && styles.selectBoxSelected]}>
-                        <Text style={styles.selectBoxText}>배구</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={() => handleSelect('sel3')} style={[styles.selectBox, selected === 'sel3' && styles.selectBoxSelected]}>
-                        <Text style={styles.selectBoxText}>배드민턴</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={() => handleSelect('sel4')} style={[styles.selectBox, selected === 'sel4' && styles.selectBoxSelected]}>
-                        <Text style={styles.selectBoxText}>농구</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={() => handleSelect('sel5')} style={[styles.selectBox, selected === 'sel5' && styles.selectBoxSelected]}>
-                        <Text style={styles.selectBoxText}>축구</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={() => handleSelect('sel6')} style={[styles.selectBox, selected === 'sel6' && styles.selectBoxSelected]}>
-                        <Text style={styles.selectBoxText}>피구</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={() => handleSelect('sel7')}  style={[styles.selectBox, selected === 'sel7' && styles.selectBoxSelected]}>
-                        <Text style={styles.selectBoxText}>달리기</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={() => handleSelect('sel8')}  style={[styles.selectBox, selected === 'sel8' && styles.selectBoxSelected]}>
-                        <Text style={styles.selectBoxText}>자전거</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={() => handleSelect('sel9')}  style={[styles.selectBox, selected === 'sel9' && styles.selectBoxSelected]}>
-                        <Text style={styles.selectBoxText}>여기 없어</Text>
-                    </TouchableOpacity>
-
+                    {[
+                        '수영',
+                        '배구',
+                        '배드민턴',
+                        '농구',
+                        '축구',
+                        '피구',
+                        '달리기',
+                        '자전거',
+                        '여기 없어',
+                    ].map((label) => (
+                        <TouchableOpacity
+                            key={label}
+                            onPress={() => handleSelect(label)}
+                            style={[
+                                styles.selectBox,
+                                selected === label && styles.selectBoxSelected,
+                            ]}
+                        >
+                            <Text style={styles.selectBoxText}>{label}</Text>
+                        </TouchableOpacity>
+                    ))}
                 </View>
-
             </SafeAreaView>
-
         </LoginBackground>
     );
-}
+  }
 
 const styles = StyleSheet.create({
     container: {

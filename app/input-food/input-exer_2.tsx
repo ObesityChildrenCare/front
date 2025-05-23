@@ -26,8 +26,18 @@ export default function InputExer2() {
     }
     // 다음 버튼 함수
     const handleNext = () => {
-        router.push('/input-food/input-exer_3')
-    }
+        if (customExercise.trim()) {
+            router.push({
+                pathname: '/input-food/input-exer_3',
+                params: { exercise: customExercise },
+            });
+        } else {
+            alert('운동 이름을 입력해줘줘!');
+        }
+      };
+
+    // 운동 이름 적는 변수
+    const [customExercise, setCustomExercise] = useState('');
 
     return (
         <LoginBackground>
@@ -60,6 +70,8 @@ export default function InputExer2() {
                     style={[styles.selectBox, { backgroundColor: '#FFFFFF', textAlign: 'center', fontSize: 16 }]}
                     placeholder="운동 이름을 적어줘!"
                     placeholderTextColor="rgba(115, 115, 115, 1)"
+                    value={customExercise}
+                    onChangeText={setCustomExercise}
                 />
 
 

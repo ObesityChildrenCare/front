@@ -28,6 +28,7 @@ export default function InputExer4() {
     // 파라미터 전달받기
     const params = useLocalSearchParams();
     const exerCount = params.exerCount ? parseInt(params.exerCount as string, 10) : 0;
+    const exercise = typeof params.exercise === 'string' ? params.exercise : '';
 
     // 이전 버튼 함수
     const handleBefore = () => {
@@ -61,7 +62,7 @@ export default function InputExer4() {
                     오늘의 운동은 바로,
                 </Text>
                 <Text style={styles.exerBox}>
-                    <Text style={styles.normalText}>배구</Text>
+                    <Text style={styles.normalText}>{exercise}</Text>
                 </Text>
 
                 <Text style={styles.normalText}>
