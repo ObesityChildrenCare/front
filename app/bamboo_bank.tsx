@@ -19,7 +19,9 @@ export default function MainScreen() {
       <SafeAreaView style={styles.container}>
         <View style={styles.header}>
           <TouchableOpacity style={styles.headerPrev} onPress={handlePrev}>
-            <Image source={require('@/assets/images/prev_key.png')}></Image>
+            <Text style={styles.arrowText}>
+              {'\u2190'}
+            </Text>
           </TouchableOpacity>
         </View>
 
@@ -70,13 +72,22 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingTop: 12,
   },
+  backArrow: {
+    position: 'absolute',
+    top: 60,
+    left: 20,
+  },
+  arrowText: {
+    fontSize: 30,
+    color: '#2E0854',
+  },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 25,
-    paddingHorizontal: 30,
-    paddingTop: 15,
+    paddingHorizontal: 10,
+    paddingTop: 35,
   },
   headerPrev: {
     width: 40,

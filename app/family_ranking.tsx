@@ -124,7 +124,11 @@ const styles = StyleSheet.create({
     paddingTop: 12,
     paddingBottom: 30,
   },
-
+  backArrow: {
+    position: 'absolute',
+    top: 50,
+    left: 35,
+  },
   arrowText: {
     fontSize: 30,
     color: '#2E0854',
@@ -135,8 +139,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 16,
-    paddingHorizontal: 30,
-    paddingTop: 15,
+    paddingHorizontal: 20,
+    paddingTop: 30,
   },
   headerPrev: {
     width: 40,
