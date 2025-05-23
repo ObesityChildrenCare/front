@@ -1,4 +1,5 @@
-import LoginBackground from '@/components/LoginBackground';
+import LoginBackground from '@/components/LoginBackground'; 
+import BackButton from '@/components/BackButton';
 import { router } from 'expo-router';
 import {
   Image,
@@ -16,15 +17,10 @@ export default function MainScreen() {
 
   return (
     <LoginBackground>
+      { /* 뒤로가기 버튼 */}
+      <BackButton />
+      
       <SafeAreaView style={styles.container}>
-        <View style={styles.header}>
-          <TouchableOpacity style={styles.headerPrev} onPress={handlePrev}>
-            <Text style={styles.arrowText}>
-              {'\u2190'}
-            </Text>
-          </TouchableOpacity>
-        </View>
-
         <Text
           style={{
             fontSize: 20,
@@ -69,15 +65,14 @@ export default function MainScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 24,
-    paddingTop: 12,
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    paddingHorizontal: 10,
+    marginTop: 120,
   },
   backArrow: {
     position: 'absolute',
-    top: 60,
     left: 20,
-  },
-  arrowText: {
     fontSize: 30,
     color: '#2E0854',
   },

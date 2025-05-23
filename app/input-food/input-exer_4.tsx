@@ -15,12 +15,13 @@ import {
 } from 'react-native';
 
 import LoginBackground from '@/components/LoginBackground';
+import BackButton from '@/components/BackButton';
 
 export default function InputExer4() {
 
-    const [selected, setSelected] = useState<'yes' | 'no' |null>(null);
-    
-    const handleSelect = (option: 'yes' | 'no' ) => {
+    const [selected, setSelected] = useState<'yes' | 'no' | null>(null);
+
+    const handleSelect = (option: 'yes' | 'no') => {
         setSelected(option);
     }
 
@@ -28,27 +29,19 @@ export default function InputExer4() {
     const params = useLocalSearchParams();
     const exerCount = params.exerCount ? parseInt(params.exerCount as string, 10) : 0;
 
-    // 뒤로가기
-    const handleBack = () => {
-        router.back();
-    }
-
     // 이전 버튼 함수
     const handleBefore = () => {
         router.back();
     }
     // 다음 버튼 함수
     const handleNext = () => {
+        router.push('/input-food/input-food_6')
     }
     return (
         <LoginBackground>
-
+      
             { /* 뒤로가기 버튼 */}
-            <TouchableOpacity onPress={handleBack} style={styles.backArrow}>
-                <Text style={styles.arrowText}>
-                    {'\u2190'}
-                </Text>
-            </TouchableOpacity>
+            <BackButton />
 
             <SafeAreaView style={styles.container}>
 
@@ -98,8 +91,8 @@ export default function InputExer4() {
                     >
                         <Text style={styles.selectBoxText}>맞아</Text>
                     </TouchableOpacity>
-    
-    
+
+
                 </View>
 
                 { /* 다음 버튼 */}
@@ -127,15 +120,7 @@ const styles = StyleSheet.create({
         marginTop: 130,
         marginBottom: -10,
     },
-    backArrow: {
-        position: 'absolute',
-        top: 50,
-        left: 20,
-    },
-    arrowText: {
-        fontSize: 30,
-        color: '#2E0854',
-    },
+
     arrow: {
         fontSize: 24,
         color: '#fff',
@@ -148,7 +133,7 @@ const styles = StyleSheet.create({
 
     fixedButtonContainer: {
         position: 'absolute',
-        bottom: 50,
+        bottom: 70,
         left: 0,
         right: 0,
         flexDirection: 'row',
@@ -230,7 +215,7 @@ const styles = StyleSheet.create({
     },
     selectionContainer: {
         position: 'absolute',
-        bottom: 90,
+        bottom: 120,
         left: 0,
         right: 0,
         flexDirection: 'row',

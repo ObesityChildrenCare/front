@@ -1,6 +1,6 @@
 /*
 
-   사진을 어떻게 불러올건지, 찍을건지, 없는지 선택하는 창
+   무슨 운동을 했는지 선택하는 창
 
 */
 import { router } from 'expo-router';
@@ -16,13 +16,9 @@ import {
 } from 'react-native';
 
 import LoginBackground from '@/components/LoginBackground';
+import BackButton from '@/components/BackButton';
 
 export default function InputExer2() {
-
-    // 뒤로가기
-    const handleBack = () => {
-        router.back();
-    }
 
     // 이전 버튼 함수
     const handleBefore = () => {
@@ -37,11 +33,7 @@ export default function InputExer2() {
         <LoginBackground>
 
             { /* 뒤로가기 버튼 */}
-            <TouchableOpacity onPress={handleBack} style={styles.backArrow}>
-                <Text style={styles.arrowText}>
-                    {'\u2190'}
-                </Text>
-            </TouchableOpacity>
+            <BackButton />
 
             <SafeAreaView style={styles.container}>
 
@@ -94,15 +86,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 24,
         marginTop: 130,
         marginBottom: -10,
-    },
-    backArrow: {
-        position: 'absolute',
-        top: 50,
-        left: 20,
-    },
-    arrowText: {
-        fontSize: 30,
-        color: '#2E0854',
     },
     arrow: {
         fontSize: 24,

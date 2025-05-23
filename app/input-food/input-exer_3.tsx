@@ -1,6 +1,6 @@
 /*
 
-   사진을 어떻게 불러올건지, 찍을건지, 없는지 선택하는 창
+   운동을 얼마나 했는지 입력하는 창
 
 */
 import { router } from 'expo-router';
@@ -15,13 +15,9 @@ import {
 } from 'react-native';
 
 import LoginBackground from '@/components/LoginBackground';
+import BackButton from '@/components/BackButton';
 
 export default function InputExer3() {
-
-    // 뒤로가기
-    const handleBack = () => {
-        router.back();
-    }
 
     // 이전 버튼 함수
     const handleBefore = () => {
@@ -49,11 +45,7 @@ export default function InputExer3() {
         <LoginBackground>
 
             { /* 뒤로가기 버튼 */}
-            <TouchableOpacity onPress={handleBack} style={styles.backArrow}>
-                <Text style={styles.arrowText}>
-                    {'\u2190'}
-                </Text>
-            </TouchableOpacity>
+            <BackButton />
 
             <SafeAreaView style={styles.container}>
 
@@ -80,8 +72,7 @@ export default function InputExer3() {
                     <Text style={{ fontSize: 45 }}>{exerCount}</Text> (분)
                 </Text>
 
-
-                <View style={styles.selectionContainer}>
+                <View style={styles.buttonRow}>
                     {/* 플러스 */}
                     <TouchableOpacity style={styles.selectBox2} onPress={increaseCount}>
                         <Text style={styles.selectBoxText}>+</Text>
@@ -90,18 +81,14 @@ export default function InputExer3() {
                     <TouchableOpacity style={styles.selectBox} onPress={decreaseCount}>
                         <Text style={styles.selectBoxText}>-</Text>
                     </TouchableOpacity>
-
-
                 </View>
 
                 {/*운동 시간 제출 버튼 */}
                 <TouchableOpacity onPress={(handleNext)}
-                    style={[styles.selectBox, { width: "80%" }]}
-                >
-
+                    style={[styles.selectBox, { width: "80%" }]}>
                     <Text style={styles.selectBoxText}>자, 여기!</Text>
-
                 </TouchableOpacity>
+
 
 
             </SafeAreaView>
@@ -117,15 +104,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 24,
         marginTop: 130,
         marginBottom: -10,
-    },
-    backArrow: {
-        position: 'absolute',
-        top: 50,
-        left: 20,
-    },
-    arrowText: {
-        fontSize: 30,
-        color: '#2E0854',
     },
     arrow: {
         fontSize: 24,
@@ -181,15 +159,13 @@ const styles = StyleSheet.create({
         marginBottom: 0,
         marginTop: 0,
     },
-    selectionContainer: {
-        position: 'absolute',
-        bottom: 190,
-        left: 0,
-        right: 0,
+
+    buttonRow: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingHorizontal: 95,
-    },
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: 20,
+      },
 
     selectBox: {
         width: 83,

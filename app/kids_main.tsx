@@ -1,4 +1,5 @@
 import LoginBackground from '@/components/LoginBackground';
+import BackButton from '@/components/BackButton';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import {
@@ -18,6 +19,10 @@ export default function MainScreen() {
     // router.replace('/kids_home');
   };
 
+  const handleInputSelect = () => {
+    router.push('/input-food/input-select');
+  };
+
   const handleRankHome = () => {
     router.push('/family_ranking');
   };
@@ -32,16 +37,9 @@ export default function MainScreen() {
 
   return (
     <LoginBackground>
-
+      <BackButton />
 
       <SafeAreaView style={styles.container}>
-
-        { /* 뒤로가기 버튼 */}
-        <TouchableOpacity onPress={handlePrev} style={styles.backArrow}>
-          <Text style={styles.arrowText}>
-            {'\u2190'}
-          </Text>
-        </TouchableOpacity>
         {/* 오른쪽 위 작은 대나무 아이콘 */}
         <TouchableOpacity onPress={handleBambooBank} style={styles.minibamboo}>
           <Image source={require('@/assets/images/bamboo_icon.png')} style={styles.minibamboo} />
@@ -53,6 +51,7 @@ export default function MainScreen() {
             color: '#2E0854E0',
             fontWeight: '700',
             marginBottom: 10,
+            marginTop: 100,
             marginLeft: 22,
           }}
         >
@@ -107,7 +106,7 @@ export default function MainScreen() {
           </View>
 
           <View style={styles.rewardsRow}>
-            <TouchableOpacity style={styles.rewardBox}>
+            <TouchableOpacity style={styles.rewardBox} onPress ={handleInputSelect}>
               <Image source={require('@/assets/images/pencil.png')} style={styles.buttonIcon} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.rewardBox}>
@@ -128,15 +127,16 @@ export default function MainScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
     paddingHorizontal: 24,
-    paddingTop: 100,
+    marginTop: 10,
+    marginBottom: -10,
   },
   backArrow: {
     position: 'absolute',
-    top: 50,
-    left: 35,
-  },
-  arrowText: {
+    top: 25,
+    left: 15,
     fontSize: 30,
     color: '#2E0854',
   },
