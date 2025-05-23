@@ -13,6 +13,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 
+import BackButton from '@/components/BackButton';
 import LoginBackground from '@/components/LoginBackground';
 
 export default function InputFood7() {
@@ -22,18 +23,14 @@ export default function InputFood7() {
     const handleSelect = (option: 'sel1' | 'sel2') => {
         setSelected(option);
         if (option === 'sel1') {
-            router.replace('/login_child'); // 메인화면
+            router.replace('/kids_main'); // 메인화면
         } else if (option === 'sel2') {
             router.replace('/input-food/input-select'); // 다시정하기
         }
     }
-
-
-    // 뒤로가기
-    const handleBack = () => {
-        //메인화면 생기면 변경
-        router.replace('/login_child');
-    }
+    const handleBambooBank = () => {
+        router.push('/bamboo_bank');
+    };
 
     const rewardName = '향긋한 대나무';
     const rewardCount = 10;
@@ -41,14 +38,10 @@ export default function InputFood7() {
     return (
         <LoginBackground>
             { /* 뒤로가기 버튼 */}
-            <TouchableOpacity onPress={handleBack} style={styles.backArrow}>
-                <Text style={styles.arrowText}>
-                    {'\u2190'}
-                </Text>
-            </TouchableOpacity>
+            <BackButton onPress={() => router.replace('/kids_main')} />
 
             {/* 오른쪽 위 작은 대나무 아이콘 */}
-            <TouchableOpacity>
+            <TouchableOpacity onPress={handleBambooBank}>
                 <Image source={require('@/assets/images/bamboo_icon.png')} style={styles.minibamboo} />
             </TouchableOpacity>
 
@@ -121,15 +114,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 24,
         marginTop: 130,
         marginBottom: -10,
-    },
-    backArrow: {
-        position: 'absolute',
-        top: 50,
-        left: 20,
-    },
-    arrowText: {
-        fontSize: 30,
-        color: '#2E0854',
     },
     minibamboo: {
         position: 'absolute',

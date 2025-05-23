@@ -50,10 +50,6 @@ export default function LoginScreenChild() {
     alert('요청 메세지를 전송했어요!');
   };
 
-  const tempFunction = () => {
-    router.push('/input-food/input-select');
-  }
-
   return (
     <LoginBackground>
       <SafeAreaView style={styles.container}>
@@ -91,7 +87,7 @@ export default function LoginScreenChild() {
         <View style={styles.footer}>
           <Text style={styles.footerText}>암호를 모르겠나요? </Text>
 
-          <TouchableOpacity onPress = {tempFunction}>
+          <TouchableOpacity>
 
             <Text style={styles.signup}>요청하기</Text>
           </TouchableOpacity>
