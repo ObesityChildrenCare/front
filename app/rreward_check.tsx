@@ -172,11 +172,13 @@ const styles = StyleSheet.create({
   },
   puzzle1: {
     top: 0,
-    left: 0,
+    left: 70,
+    width: 150,
+    height: 150,
   },
   puzzle2: {
-    top: 10,
-    right: 10,
+    top: 12,
+    left: 0,
   },
   puzzle3: {
     bottom: 10,
