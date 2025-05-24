@@ -1,6 +1,6 @@
 // rreward_check
-import LoginBackground from '@/components/LoginBackground';
 import BackButton from '@/components/BackButton';
+import LoginBackground from '@/components/LoginBackground';
 import { router } from 'expo-router';
 import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
@@ -49,11 +49,11 @@ export default function RRewardCheck() {
           <TouchableOpacity style={[styles.puzzlePiece, styles.puzzle1]} onPress={goToPuzzleReward}>
             <Image source={require('@/assets/images/pink_puzzle_piece.png')} style={styles.puzzleImage} />
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.puzzlePiece, styles.puzzle2]} onPress={goToPuzzleReward}>
-            <Image source={require('@/assets/images/pale_puzzle_piece.png')} style={styles.puzzleImage} />
-          </TouchableOpacity>
           <TouchableOpacity style={[styles.puzzlePiece, styles.puzzle3]} onPress={goToPuzzleReward}>
             <Image source={require('@/assets/images/green_puzzle_piece.png')} style={styles.puzzleImage} />
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.puzzlePiece, styles.puzzle2]} onPress={goToPuzzleReward}>
+            <Image source={require('@/assets/images/pale_puzzle_piece.png')} style={styles.puzzleImage} />
           </TouchableOpacity>
           <TouchableOpacity style={[styles.puzzlePiece, styles.puzzle4]} onPress={goToPuzzleReward}>
             <Image source={require('@/assets/images/purple_puzzle_piece.png')} style={styles.puzzleImage} />
@@ -163,23 +163,27 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     position: 'absolute', // 수정: 개별 위치 지정
   },
-  puzzle1: {
+  puzzle1: { // pink
     top: 0,
     left: 70,
     width: 150,
     height: 150,
   },
-  puzzle2: {
+  puzzle2: { // pale
     top: 12,
-    left: 0,
-  },
-  puzzle3: {
-    bottom: 10,
     left: 10,
   },
-  puzzle4: {
+  puzzle3: { // green
+    top: 80,
+    left: 0,
+    width: 150,
+    height: 150,
+  },
+  puzzle4: { // purple
     bottom: 10,
-    right: 10,
+    left: 0,
+    width: 150,
+    height: 150,
   },
   puzzleImage: {
     width: '80%',
