@@ -35,6 +35,10 @@ export default function MainScreen() {
     router.back();
   };
 
+  const goProgressMap = () =>{
+    router.push('/rprogress_map'); //진행상황 페이지 
+  }
+
   return (
     <LoginBackground>
       <BackButton />
@@ -74,7 +78,7 @@ export default function MainScreen() {
               오늘의 활동왕이 바뀌고 있어!
             </Text>
           </View>
-          <TouchableOpacity style={styles.inputArrow}>
+          <TouchableOpacity style={styles.inputArrow} onPress={goProgressMap}>
             <Text style={{ color: '#fff', fontSize: 18 }}>{'>'}</Text>
           </TouchableOpacity>
         </View>
