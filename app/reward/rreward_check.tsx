@@ -1,11 +1,12 @@
 // rreward_check
 import LoginBackground from '@/components/LoginBackground';
+import BackButton from '@/components/BackButton';
 import { router } from 'expo-router';
 import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function RRewardCheck() {
   const goBack = () => {
-    router.replace('/rprogress_map');
+    router.replace('/reward/rprogress_map');
   };
 
   const goToBambooBank = () => {
@@ -13,7 +14,7 @@ export default function RRewardCheck() {
   };
 
   const goToPuzzleReward = () => {
-    router.push('/rmiddle_reward_check');
+    router.push('/reward/rmiddle_reward_check');
   };
 
   const goToFamilyRanking = () => {
@@ -22,28 +23,22 @@ export default function RRewardCheck() {
 
   return (
     <LoginBackground>
-      <SafeAreaView style={styles.container}>
-        {/* 상단 네비게이션 */}
-        <View style={styles.header}>
-          <TouchableOpacity onPress={goBack}>
-            <Image source={require('@/assets/images/prev_key.png')} style={styles.iconNav} />
-          </TouchableOpacity>
-          {/* 대나무 아이콘 원 안에 배치 */}
-          <View style={styles.profile}>
-            <TouchableOpacity onPress={goToBambooBank}>
-              <Image
-                source={require('@/assets/images/bamboo.png')}
-                style={styles.bambooIcon}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
+      {/* 상단 네비게이션 */}
+      <BackButton />
 
-        {/* 텍스트 블럭 + 판다 */}
+      <TouchableOpacity onPress={goToBambooBank} style={styles.bambooIcon}>
+        <Image
+          source={require('@/assets/images/bamboo_icon.png')}
+          style={styles.bambooIcon}
+        />
+      </TouchableOpacity>
+
+      <SafeAreaView style={styles.container}>
+
+
+        {/* 텍스트 블럭 + 판다 (디자이너 요구에 맞춰서 수정함)*/}
         <View style={styles.infoContainer}>
-          <View style={styles.pandaCircle}>
-            <Image source={require('@/assets/images/surprised_panda.png')} style={styles.pandaIcon} />
-          </View>
+            <Image source={require('@/assets/images/head_panda.png')} style={styles.pandaIcon} />
           <View style={styles.textBox}>
             <Text style={styles.infoText}>와, 대단해! 벌써 이만큼 모았어!</Text>
           </View>
@@ -88,6 +83,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 24,
+    marginTop: 90,
   },
   header: {
     flexDirection: 'row',
@@ -114,10 +110,15 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
   },
   bambooIcon: {
-    width: 30,
-    height: 30,
+    position: 'absolute',
+    top: 25,
+    right: 15,
+    width: 50,
+    height: 50,
     resizeMode: 'contain',
+    zIndex: 5,
   },
+
   infoContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -133,18 +134,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginLeft: 40, // 수정: 텍스트를 조금 오른쪽으로 이동
   },
-  pandaCircle: {
+  // 디자이너 요구에 맞춰서 수정
+  pandaIcon: {
     width: 40,
     height: 40,
-    borderRadius: 20,
-    backgroundColor: '#ffffff',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: 10,
-  },
-  pandaIcon: {
-    width: 30,
-    height: 30,
     resizeMode: 'contain',
   },
   puzzleBoard: {

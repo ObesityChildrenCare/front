@@ -1,6 +1,8 @@
-// rwork_check_ghost
+// rwork_check_bat
 import LoginBackground from '@/components/LoginBackground';
+import BackButton from '@/components/BackButton';
 import { router } from 'expo-router';
+import React from 'react';
 import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 
@@ -12,6 +14,7 @@ export default function WorkCheckScreen() {
   };
 
   const goToBank = () => {
+    // TODO: 나중에 rbamboobank.tsx로 이동
     router.push('/bamboo_bank');
     console.log('대나무 아이콘 버튼 눌림');
   };
@@ -22,24 +25,17 @@ export default function WorkCheckScreen() {
 
   return (
     <LoginBackground>
-      <SafeAreaView style={styles.container}>
-        {/* 상단바 */}
-        <View style={styles.header}>
-          <TouchableOpacity onPress={goBack}>
-          <Image source={require('@/assets/images/prev_key.png')} style={styles.iconNav} />
-          </TouchableOpacity>
+      <BackButton />
 
-          <TouchableOpacity onPress={goToBank}>
-            <Image
-              source={require('@/assets/images/bamboo.png')}
-              style={styles.profile}
-            />
-          </TouchableOpacity>
-        </View>
+      <SafeAreaView style={styles.container}>
+        {/* 오른쪽 위 작은 대나무 아이콘 */}
+        <TouchableOpacity onPress={goToBank} style={styles.minibamboo}>
+          <Image source={require('@/assets/images/bamboo_icon.png')} style={styles.minibamboo} />
+        </TouchableOpacity>
 
         {/* 본문 텍스트 */}
         <Text style={styles.title}>
-          <Text style={styles.highlight}>유령</Text> 친구를 만났군요?
+          <Text style={styles.highlight}>박쥐</Text> 친구를 만났군요?
         </Text>
 
         <Image
@@ -146,5 +142,13 @@ const styles = StyleSheet.create({
     height: 35,
     resizeMode: 'contain',
   },
-  
+  minibamboo: {
+    position: 'absolute',
+    top: 25,
+    right: 15,
+    width: 50,
+    height: 50,
+    resizeMode: 'contain',
+    zIndex: 5,
+  },
 });

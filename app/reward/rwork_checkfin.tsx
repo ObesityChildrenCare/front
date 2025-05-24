@@ -1,5 +1,6 @@
 // rwork_checkfin
 import YellowBackground from '@/components/YellowBackground'; // 그라데이션 배경
+import BackButton from '@/components/BackButton';
 import { router } from 'expo-router';
 import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
@@ -9,18 +10,14 @@ export default function WorkCheckFinScreen() {
   };
 
   const goToPuzzleBoard = () => {
-    router.push('/rreward_check');
+    router.push('/reward/rreward_check');
   };
 
   return (
     <YellowBackground>
+      <BackButton />
+      
       <SafeAreaView style={styles.container}>
-        {/* 상단 뒤로가기 */}
-        <View style={styles.header}>
-          <TouchableOpacity onPress={goBack}>
-            <Image source={require('@/assets/images/prev_key.png')} style={styles.iconNav} />
-          </TouchableOpacity>
-        </View>
 
         <Text style={styles.title}>오늘도 미션 성공!</Text>
 

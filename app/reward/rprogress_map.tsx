@@ -1,5 +1,6 @@
 // rprogress_map
 import LoginBackground from '@/components/LoginBackground';
+import BackButton from '@/components/BackButton';
 import { router } from 'expo-router';
 import React from 'react';
 import { Image, SafeAreaView, StyleSheet, TouchableOpacity, View } from 'react-native';
@@ -10,44 +11,36 @@ export default function RProgressMap() {
   };
 
   const goToPuzzle = () => {
-    router.push('/rreward_check');
+    router.push('/reward/rreward_check');
   };
 
   const goToGhost = () => {
-    router.push('/rwork_check_ghost');
+    router.push('/reward/rwork_check_ghost');
   };
 
   const goToBat = () => {
-    router.push('/rwork_check_bat');
+    router.push('/reward/rwork_check_bat');
   };
 
   const goToHouse = () => {
-    router.push('/rwork_checkfin');
+    router.push('/reward/rwork_checkfin');
   };
 
   return (
     <LoginBackground>
-      <SafeAreaView style={styles.container}>
-        {/* 상단 네비게이션 */}
-        <View style={styles.header}>
-          <TouchableOpacity onPress={goBack}>
-            <Image source={require('@/assets/images/prev_key.png')} style={styles.iconNav} />
-          </TouchableOpacity>
+      <BackButton />
 
-          {/* 퍼즐 아이콘 + 배경 원 함께 감싸기 */}
-          <View style={styles.puzzleWrapper}>
-            <View style={styles.circle_puzzle} />
-            <TouchableOpacity onPress={goToPuzzle} style={styles.puzzleTouchable}>
-              <Image source={require('@/assets/images/yellow_puzzle.png')} style={styles.iconPuzzle} />
-            </TouchableOpacity>
-          </View>
+      <SafeAreaView style={styles.container}>
+
+        <TouchableOpacity onPress={goToPuzzle} style={styles.minibamboo}>
+          <Image source={require('@/assets/images/yellow_puzzle.png')} style={styles.minibamboo} />
+        </TouchableOpacity>
 
           {/* <TouchableOpacity onPress={goToPuzzle}>
             <Image source={require('@/assets/images/yellow_puzzle.png')} style={styles.iconPuzzle} />
           </TouchableOpacity>
           <View style={[styles.circle_puzzle, styles.circle_p]} /> */}
-        </View>
-
+        
         {/* 경로 배경 */}
         <View style={styles.pathContainer}>
           <Image source={require('@/assets/images/path_map.png')} style={styles.pathImage} />
@@ -99,12 +92,12 @@ const styles = StyleSheet.create({
   },
 
   puzzleWrapper: {
-  position: 'relative',
-  width: 40,
-  height: 40,
-  justifyContent: 'center',
-  alignItems: 'center',
-},
+    position: 'relative',
+    width: 40,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 
   circle_puzzle: {
     position: 'absolute',
@@ -113,7 +106,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     backgroundColor: '#E6E6FA',
     zIndex: 1,
-},
+  },
 
   puzzleTouchable: {
     zIndex: 2,
@@ -136,7 +129,7 @@ const styles = StyleSheet.create({
   housePosition: {
     position: 'absolute',
     top: 50,
-    left:80 ,
+    left: 80,
     alignSelf: 'center',
   },
   house: {
@@ -155,7 +148,7 @@ const styles = StyleSheet.create({
   batPosition: {
     position: 'absolute',
     top: 390,
-    left:0,
+    left: 0,
     alignSelf: 'center',
     transform: [{ translateX: 40 }],
   },
@@ -172,33 +165,33 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
   circle: {
-  position: 'absolute',
-  width: 80,
-  height: 80,
-  borderRadius: 100,
-  backgroundColor: 'rgba(255, 215, 0, 0.5)',
-  zIndex: 2, // 경로보다 위
+    position: 'absolute',
+    width: 80,
+    height: 80,
+    borderRadius: 100,
+    backgroundColor: 'rgba(255, 215, 0, 0.5)',
+    zIndex: 2, // 경로보다 위
   },
   circle_purple: {
-  position: 'absolute',
-  width: 80,
-  height: 80,
-  borderRadius: 100,
-  backgroundColor: 'rgba(236, 212, 251, 0.8)',
-  zIndex: 2, // 경로보다 위
+    position: 'absolute',
+    width: 80,
+    height: 80,
+    borderRadius: 100,
+    backgroundColor: 'rgba(236, 212, 251, 0.8)',
+    zIndex: 2, // 경로보다 위
   },
   circle_Violet: {
-  position: 'absolute',
-  width: 80,
-  height: 80,
-  borderRadius: 100,
-  backgroundColor: '#c8a2e0',
-  zIndex: 2, // 경로보다 위
+    position: 'absolute',
+    width: 80,
+    height: 80,
+    borderRadius: 100,
+    backgroundColor: '#c8a2e0',
+    zIndex: 2, // 경로보다 위
   },
-  
+
   circle1: {
-  top: 120,
-  left: 280,
+    top: 120,
+    left: 280,
   },
   circle2: {
     top: 190,
@@ -215,5 +208,14 @@ const styles = StyleSheet.create({
   circle_p: {
     top: 10,
     left: 100,
+  },
+  minibamboo: {
+    position: 'absolute',
+    top: 25,
+    right: 15,
+    width: 50,
+    height: 50,
+    resizeMode: 'contain',
+    zIndex: 5,
   },
 });

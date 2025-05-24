@@ -36,7 +36,7 @@ export default function MainScreen() {
   };
 
   const goProgressMap = () =>{
-    router.push('/rprogress_map'); //진행상황 페이지 
+    router.push('/reward/rprogress_map'); //진행상황 페이지 
   }
 
   return (
