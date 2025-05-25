@@ -96,7 +96,7 @@ export default function MainScreen() {
               <View style={[styles.marker, { left: '100%' }]} />
               <Image
                 style={[styles.barIconPuzzle]}
-                source={require('@/assets/images/yellow_puzzle_big.png')}
+                source={require('@/assets/images/yellow_puzzle.png')}
               />
               <Image
                 style={[styles.barIconGift]}
@@ -111,7 +111,7 @@ export default function MainScreen() {
             </TouchableOpacity>
             <TouchableOpacity style={styles.rewardBox}>
               <Image
-                source={require('@/assets/images/yellow_puzzle_big.png')} style={styles.buttonIcon}
+                source={require('@/assets/images/yellow_puzzle.png')} style={styles.buttonIcon}
               />
             </TouchableOpacity>
             <TouchableOpacity style={styles.rewardBox} onPress={handleRankHome}>
