@@ -29,10 +29,15 @@ export default function MainScreen() {
         <View style={styles.header}>
           <Text style={styles.headerText}>MAIN</Text>
           <Switch
-            trackColor={{ false: '#ccc', true: '#D8B4F8' }}
-            thumbColor={isEnabled ? '#fff' : '#f4f3f4'}
-            onValueChange={toggleSwitch}
-            value={isEnabled}
+          trackColor={{ false: '#ccc', true: '#D8B4F8' }}
+          thumbColor={isEnabled ? '#fff' : '#f4f3f4'}
+          onValueChange={(value) => {
+            toggleSwitch(); // 상태 업데이트
+            if (value) {
+              router.push('/parent_main_locked'); // true일 때 이동
+            }
+          }}
+          value={isEnabled}
           />
         </View>
 

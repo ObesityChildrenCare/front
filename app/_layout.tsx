@@ -36,6 +36,9 @@ export default function RootLayout() {
         <Stack.Screen name="family_main" options={{ headerShown: false }} />
         <Stack.Screen name="family_ranking" options={{ headerShown: false }} />
         <Stack.Screen name="kids_main" options={{ headerShown: false }} />
+        <Stack.Screen name="parent_main_detailed" options={{ headerShown: false }} />
+        <Stack.Screen name="parent_main_locked" options={{ headerShown: false }} />
+        <Stack.Screen name="parent_main_unlocked" options={{ headerShown: false }} />
         <Stack.Screen name="bamboo_bank" options={{ headerShown: false }} />
         <Stack.Screen
           name="signup_price_agree"
