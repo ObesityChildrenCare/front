@@ -1,6 +1,6 @@
 // rprogress_map
-import LoginBackground from '@/components/LoginBackground';
 import BackButton from '@/components/BackButton';
+import LoginBackground from '@/components/LoginBackground';
 import { router } from 'expo-router';
 import React from 'react';
 import { Image, SafeAreaView, StyleSheet, TouchableOpacity, View } from 'react-native';
@@ -33,7 +33,7 @@ export default function RProgressMap() {
       <SafeAreaView style={styles.container}>
 
         <TouchableOpacity onPress={goToPuzzle} style={styles.minibamboo}>
-          <Image source={require('@/assets/images/yellow_puzzle.png')} style={styles.minibamboo} />
+          <Image source={require('@/assets/images/yellow_puzzle_circle.png')} style={styles.minibamboo} />
         </TouchableOpacity>
 
           {/* <TouchableOpacity onPress={goToPuzzle}>

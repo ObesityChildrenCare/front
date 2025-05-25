@@ -14,7 +14,7 @@ export default function RRewardCheck() {
   };
 
   const goToPuzzleReward = () => {
-    router.push('/reward/rmiddle_reward_check');
+    router.push('/reward/rreward_check_middle');
   };
 
   const goToFamilyRanking = () => {
@@ -36,7 +36,7 @@ export default function RRewardCheck() {
       <SafeAreaView style={styles.container}>
 
 
-        {/* 텍스트 블럭 + 판다 (디자이너 요구에 맞춰서 수정함)*/}
+        {/* 텍스트 블럭 + 판다 */}
         <View style={styles.infoContainer}>
             <Image source={require('@/assets/images/head_panda.png')} style={styles.pandaIcon} />
           <View style={styles.textBox}>
