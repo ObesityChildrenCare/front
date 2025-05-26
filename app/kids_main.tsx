@@ -20,7 +20,7 @@ export default function MainScreen() {
   };
 
   const handleInputSelect = () => {
-    router.push('/input-food/input-select');
+    router.push('/input-food/input_select');
   };
 
   const handleRankHome = () => {
@@ -35,9 +35,9 @@ export default function MainScreen() {
     router.back();
   };
 
-  const goProgressMap = () =>{
-    router.push('/reward/rprogress_map'); //진행상황 페이지 
-  }
+  const goProgressMap = () => {
+    router.push('/reward/rprogress_map'); //진행상황 페이지
+  };
 
   return (
     <LoginBackground>
@@ -46,7 +46,10 @@ export default function MainScreen() {
       <SafeAreaView style={styles.container}>
         {/* 오른쪽 위 작은 대나무 아이콘 */}
         <TouchableOpacity onPress={handleBambooBank} style={styles.minibamboo}>
-          <Image source={require('@/assets/images/bamboo_icon.png')} style={styles.minibamboo} />
+          <Image
+            source={require('@/assets/images/bamboo_icon.png')}
+            style={styles.minibamboo}
+          />
         </TouchableOpacity>
 
         <Text
@@ -110,16 +113,26 @@ export default function MainScreen() {
           </View>
 
           <View style={styles.rewardsRow}>
-            <TouchableOpacity style={styles.rewardBox} onPress={handleInputSelect}>
-              <Image source={require('@/assets/images/pencil.png')} style={styles.buttonIcon} />
+            <TouchableOpacity
+              style={styles.rewardBox}
+              onPress={handleInputSelect}
+            >
+              <Image
+                source={require('@/assets/images/pencil.png')}
+                style={styles.buttonIcon}
+              />
             </TouchableOpacity>
             <TouchableOpacity style={styles.rewardBox}>
               <Image
-                source={require('@/assets/images/yellow_puzzle_big.png')} style={styles.buttonIcon}
+                source={require('@/assets/images/yellow_puzzle_big.png')}
+                style={styles.buttonIcon}
               />
             </TouchableOpacity>
             <TouchableOpacity style={styles.rewardBox} onPress={handleRankHome}>
-              <Image source={require('@/assets/images/prize.png')} style={styles.buttonIcon} />
+              <Image
+                source={require('@/assets/images/prize.png')}
+                style={styles.buttonIcon}
+              />
             </TouchableOpacity>
           </View>
         </View>
