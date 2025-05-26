@@ -42,7 +42,10 @@ export default function MainScreen() {
       <SafeAreaView style={styles.container}>
         {/* 오른쪽 위 작은 대나무 아이콘 */}
         <TouchableOpacity onPress={handleBambooBank} style={styles.minibamboo}>
-          <Image source={require('@/assets/images/bamboo_icon.png')} style={styles.minibamboo} />
+          <Image
+            source={require('@/assets/images/bamboo_icon.png')}
+            style={styles.minibamboo}
+          />
         </TouchableOpacity>
 
         <Text
@@ -51,7 +54,7 @@ export default function MainScreen() {
             color: '#2E0854E0',
             fontWeight: '700',
             marginBottom: 10,
-            marginTop: 100,
+            marginTop: 50,
             marginLeft: 22,
           }}
         >
@@ -106,16 +109,26 @@ export default function MainScreen() {
           </View>
 
           <View style={styles.rewardsRow}>
-            <TouchableOpacity style={styles.rewardBox} onPress={handleInputSelect}>
-              <Image source={require('@/assets/images/pencil.png')} style={styles.buttonIcon} />
+            <TouchableOpacity
+              style={styles.rewardBox}
+              onPress={handleInputSelect}
+            >
+              <Image
+                source={require('@/assets/images/pencil.png')}
+                style={styles.buttonIcon}
+              />
             </TouchableOpacity>
             <TouchableOpacity style={styles.rewardBox}>
               <Image
-                source={require('@/assets/images/yellow_puzzle.png')} style={styles.buttonIcon}
+                source={require('@/assets/images/yellow_puzzle.png')}
+                style={styles.buttonIcon}
               />
             </TouchableOpacity>
             <TouchableOpacity style={styles.rewardBox} onPress={handleRankHome}>
-              <Image source={require('@/assets/images/prize.png')} style={styles.buttonIcon} />
+              <Image
+                source={require('@/assets/images/prize.png')}
+                style={styles.buttonIcon}
+              />
             </TouchableOpacity>
           </View>
         </View>
