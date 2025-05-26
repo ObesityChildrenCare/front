@@ -1,8 +1,15 @@
 // rwork_checkfin
-import YellowBackground from '@/components/YellowBackground'; // 그라데이션 배경
 import BackButton from '@/components/BackButton';
+import YellowBackground from '@/components/YellowBackground'; // 그라데이션 배경
 import { router } from 'expo-router';
-import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 export default function WorkCheckFinScreen() {
   const goBack = () => {
@@ -16,9 +23,8 @@ export default function WorkCheckFinScreen() {
   return (
     <YellowBackground>
       <BackButton />
-      
-      <SafeAreaView style={styles.container}>
 
+      <SafeAreaView style={styles.container}>
         <Text style={styles.title}>오늘도 미션 성공!</Text>
 
         {/* 퍼즐 아이콘 + 배경 카드 */}
@@ -30,7 +36,8 @@ export default function WorkCheckFinScreen() {
         </View>
 
         <Text style={styles.subtitle}>
-          <Text style={styles.highlight}>퍼즐 조각</Text>이{'\n'}선물로 도착했어요!
+          <Text style={styles.highlight}>퍼즐 조각</Text>이{'\n'}선물로
+          도착했어요!
         </Text>
 
         <TouchableOpacity style={styles.puzzleButton} onPress={goToPuzzleBoard}>
@@ -64,7 +71,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   title: {
-    fontSize: 22,
+    fontSize: 26,
     fontWeight: 'bold',
     color: '#4B0082',
     marginTop: 60,
@@ -72,8 +79,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   puzzleCard: {
-    width: 120,
-    height: 120,
+    width: 160,
+    height: 160,
     backgroundColor: '#fff',
     borderRadius: 20,
     justifyContent: 'center',
@@ -91,10 +98,11 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   subtitle: {
-    fontSize: 16,
-    color: '#312218',
+    fontSize: 22,
+    color: '#2E0854E0',
     textAlign: 'center',
-    marginBottom: 30,
+    marginBottom: 70,
+    fontWeight: 600,
   },
   highlight: {
     color: '#FACC15',

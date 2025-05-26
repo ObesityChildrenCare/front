@@ -1,9 +1,14 @@
 // rwork_check_ghost
-import LoginBackground from '@/components/LoginBackground';
 import BackButton from '@/components/BackButton';
+import LoginBackground from '@/components/LoginBackground';
 import { router } from 'expo-router';
-import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-
+import {
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 
 export default function WorkCheckScreen() {
   const goToMission = () => {
@@ -18,8 +23,8 @@ export default function WorkCheckScreen() {
   };
 
   const goBack = () => {
-      router.replace('/kids_main');
-    };
+    router.replace('/kids_main');
+  };
 
   return (
     <LoginBackground>
@@ -28,7 +33,10 @@ export default function WorkCheckScreen() {
       <SafeAreaView style={styles.container}>
         {/* 오른쪽 위 작은 대나무 아이콘 */}
         <TouchableOpacity onPress={goToBank} style={styles.minibamboo}>
-          <Image source={require('@/assets/images/bamboo_icon.png')} style={styles.minibamboo} />
+          <Image
+            source={require('@/assets/images/bamboo_icon.png')}
+            style={styles.minibamboo}
+          />
         </TouchableOpacity>
 
         {/* 본문 텍스트 */}
@@ -42,11 +50,12 @@ export default function WorkCheckScreen() {
         />
 
         <Text style={styles.subtitle}>
-          향긋한 <Text style={styles.highlight}>대나무 00개</Text>를{'\n'}선물로 받았어요!
+          <Text style={styles.highlight}>향긋한 대나무 20개</Text>를{'\n'}선물로
+          받았어요!
         </Text>
 
         {/* 버튼들 */}
-        <TouchableOpacity style={styles.disabledButton} disabled>
+        <TouchableOpacity onPress={goToBank} style={styles.disabledButton}>
           <Text style={styles.disabledText}>대나무 은행으로 갈래!</Text>
         </TouchableOpacity>
 
@@ -98,8 +107,9 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   subtitle: {
-    fontSize: 16,
-    color: '#6B7280',
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#2E0854E0',
     textAlign: 'center',
     marginBottom: 30,
   },
