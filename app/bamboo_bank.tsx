@@ -1,5 +1,5 @@
-import LoginBackground from '@/components/LoginBackground'; 
 import BackButton from '@/components/BackButton';
+import LoginBackground from '@/components/LoginBackground';
 import { router } from 'expo-router';
 import {
   Image,
@@ -17,9 +17,9 @@ export default function MainScreen() {
 
   return (
     <LoginBackground>
-      { /* 뒤로가기 버튼 */}
+      {/* 뒤로가기 버튼 */}
       <BackButton />
-      
+
       <SafeAreaView style={styles.container}>
         <Text
           style={{
@@ -47,7 +47,7 @@ export default function MainScreen() {
             <Text
               style={{ fontSize: 50, fontWeight: 'bold', color: '#2E0854' }}
             >
-              50 <Text style={{ fontSize: 22 }}>(개)</Text>
+              70 <Text style={{ fontSize: 22 }}>(개)</Text>
             </Text>
           </View>
         </View>

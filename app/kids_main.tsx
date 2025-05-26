@@ -20,7 +20,7 @@ export default function MainScreen() {
   };
 
   const handleInputSelect = () => {
-    router.push('/input-food/input-select');
+    router.push('/input-food/input_select');
   };
 
   const handleRankHome = () => {
@@ -35,9 +35,9 @@ export default function MainScreen() {
     router.back();
   };
 
-  const goProgressMap = () =>{
-    router.push('/reward/rprogress_map'); //진행상황 페이지 
-  }
+  const goProgressMap = () => {
+    router.push('/reward/rprogress_map'); //진행상황 페이지
+  };
 
   return (
     <LoginBackground>
