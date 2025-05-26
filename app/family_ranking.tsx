@@ -1,6 +1,5 @@
-import LoginBackground from '@/components/LoginBackground';
 import BackButton from '@/components/BackButton';
-import { router } from 'expo-router';
+import LoginBackground from '@/components/LoginBackground';
 import { useState } from 'react';
 import {
   Image,
@@ -8,7 +7,6 @@ import {
   StyleSheet,
   Switch,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
 
@@ -18,7 +16,6 @@ export default function RankingScreen() {
 
   return (
     <LoginBackground>
-
       <BackButton />
       <View style={styles.header}>
         <Switch
@@ -29,8 +26,6 @@ export default function RankingScreen() {
         />
       </View>
       <SafeAreaView style={styles.container}>
-
-
         <View style={styles.imageContainer}>
           <Image
             source={require('@/assets/images/rank_family.png')}
@@ -135,6 +130,7 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     paddingHorizontal: 20,
     paddingTop: 50,
+    marginTop: 30,
   },
   headerPrev: {
     width: 40,

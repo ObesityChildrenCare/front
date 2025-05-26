@@ -58,7 +58,7 @@ export default function MainScreen() {
             color: '#2E0854E0',
             fontWeight: '700',
             marginBottom: 10,
-            marginTop: 100,
+            marginTop: 50,
             marginLeft: 22,
           }}
         >
@@ -103,7 +103,7 @@ export default function MainScreen() {
               <View style={[styles.marker, { left: '100%' }]} />
               <Image
                 style={[styles.barIconPuzzle]}
-                source={require('@/assets/images/yellow_puzzle_big.png')}
+                source={require('@/assets/images/yellow_puzzle.png')}
               />
               <Image
                 style={[styles.barIconGift]}
@@ -124,7 +124,7 @@ export default function MainScreen() {
             </TouchableOpacity>
             <TouchableOpacity style={styles.rewardBox}>
               <Image
-                source={require('@/assets/images/yellow_puzzle_big.png')}
+                source={require('@/assets/images/yellow_puzzle.png')}
                 style={styles.buttonIcon}
               />
             </TouchableOpacity>
