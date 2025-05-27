@@ -10,13 +10,13 @@ import {
     SafeAreaView,
     StyleSheet,
     Text,
+    TextInput,
     TouchableOpacity,
-    View,
-    TextInput  
+    View
 } from 'react-native';
 
-import LoginBackground from '@/components/LoginBackground';
 import BackButton from '@/components/BackButton';
+import LoginBackground from '@/components/LoginBackground';
 
 export default function InputExer2() {
 
@@ -32,9 +32,9 @@ export default function InputExer2() {
                 params: { exercise: customExercise },
             });
         } else {
-            alert('운동 이름을 입력해줘줘!');
+            alert('운동 이름을 입력해줘!');
         }
-      };
+    };
 
     // 운동 이름 적는 변수
     const [customExercise, setCustomExercise] = useState('');
