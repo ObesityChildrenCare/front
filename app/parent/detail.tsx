@@ -14,9 +14,11 @@ import {
     Text,
     TouchableOpacity,
     TouchableWithoutFeedback,
-    View
+    View,
+    Dimensions
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { LineChart } from 'react-native-chart-kit';
 
 export default function parentSummary() {
 
@@ -32,13 +34,21 @@ export default function parentSummary() {
             return newValue;
         });
     };
+
+    const handleHome = () => {
+        router.replace('/family_main');
+    }
+
+
     return (
         <LoginBackground>
             <View style={styles.header}>
-                <Image
-                    source={require('@/assets/images/blackhouse_icon.png')}
-                    style={styles.houseicon}
-                />
+                <TouchableOpacity onPress={handleHome}>
+                    <Image
+                        source={require('@/assets/images/blackhouse_icon.png')}
+                        style={styles.houseicon}
+                    />
+                </TouchableOpacity>
                 <Switch
                     trackColor={{ false: '#ccc', true: '#D8B4F8' }}
                     thumbColor={isEnabled ? '#fff' : '#f4f3f4'}
@@ -66,10 +76,16 @@ export default function parentSummary() {
                                 <View style={styles.profileInfo}>
                                     <Text style={styles.nameText}>김 민서 <Text style={styles.suffixText}>(님)</Text></Text>
 
-                                    <Text style={styles.infoText}>성별  여</Text>
-                                    <Text style={styles.infoText}>나이  만 11세</Text>
-                                    <Text style={styles.infoText}>신장  140 (cm)</Text>
-                                    <Text style={styles.infoText}>몸무게 30 (kg)</Text>
+                                    <Text style={styles.infoText}>
+                                        <Text style={{ color: 'rgba(255, 104, 104, 1)', fontWeight: 'bold' }}>당류</Text>
+                                        <Text>가 계속 권장 섭취량을 </Text>
+                                        <Text style={{ color: 'rgba(255, 104, 104, 1)', fontWeight: 'bold' }}>초과</Text>
+                                        <Text>하고 있어요.{"\n"}반면, </Text>
+                                        <Text style={{ color: 'rgba(255, 208, 96, 1)', fontWeight: 'bold' }}>단백질</Text>
+                                        <Text> 섭취량은 </Text>
+                                        <Text style={{ color: 'rgba(255, 208, 96, 1)', fontWeight: 'bold' }}>부족</Text>
+                                        <Text>해요.</Text>
+                                    </Text>
 
                                     <TouchableOpacity style={styles.editButton}>
                                         <Text style={styles.editButtonText}>수정하기</Text>
@@ -130,7 +146,50 @@ export default function parentSummary() {
                                     </View>
                                 </View>
                             </View>
+                            <Text style={styles.kcalTitle}>BMI 변화</Text>
 
+                            <LineChart
+                                data={{
+                                    labels: ['5월 1주차', '5월 2주차', '5월 3주차', '5월 4주차', '6월 1주차'],
+                                    datasets: [
+                                        {
+                                            data: [29, 27.2, 26.1, 25.0, 24.1],
+                                            color: () => '#C1A6F8',
+                                            strokeWidth: 2,
+                                        },
+                                    ],
+                                }}
+                                width={Dimensions.get('window').width - 60}
+                                height={190}
+                                withShadow={false}
+                                withInnerLines={false}
+                                withOuterLines={false}
+                                yAxisSuffix=""
+                                yAxisInterval={1}
+                                chartConfig={{
+                                    backgroundGradientFrom: '#EEEAF7',
+                                    backgroundGradientTo: '#EEEAF7',
+                                    decimalPlaces: 1,
+                                    color: () => '#C1A6F8',
+                                    labelColor: () => 'rgba(186, 174, 198, 1)', // ← 변경된 부분
+                                    fillShadowGradient: 'transparent',
+                                    fillShadowGradientOpacity: 0,
+                                    propsForDots: {
+                                        r: '5',
+                                        strokeWidth: '2',
+                                        stroke: '#C1A6F8',
+                                        fill: '#C1A6F8',
+                                    },
+                                    formatYLabel: (yValue) => parseInt(yValue).toString(),
+                                  }}
+                                style={{
+                                    marginVertical: 8,
+                                    borderRadius: 20,
+                                }}
+                                segments={5}
+                                yLabelsOffset={6}
+                                fromZero={false}
+                            />
                         </View>
                     </TouchableWithoutFeedback>
                 </ScrollView>
@@ -339,5 +398,12 @@ const styles = StyleSheet.create({
     nutrientBarFill: {
         height: '100%',
         borderRadius: 10,
+    },
+    bmiBox: {
+        backgroundColor: 'rgba(230, 230, 250, 0.55)',
+        borderRadius: 20,
+        padding: 10,
+        marginTop: 30,
+        alignItems: 'center',
       },
 });

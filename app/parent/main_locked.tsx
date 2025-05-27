@@ -33,13 +33,19 @@ export default function parentlocked() {
         router.push('/parent/summary');
     }
 
+    const handleHome = () => {
+        router.replace('/family_main');
+    }
+
     return (
         <LoginBackground>
             <View style={styles.header}>
-                <Image
-                    source={require('@/assets/images/blackhouse_icon.png')}
-                    style={styles.houseicon}
-                />
+                <TouchableOpacity onPress={handleHome}>
+                    <Image
+                        source={require('@/assets/images/blackhouse_icon.png')}
+                        style={styles.houseicon}
+                    />
+                </TouchableOpacity>
                 <Switch
                     trackColor={{ false: '#ccc', true: '#D8B4F8' }}
                     thumbColor={isEnabled ? '#fff' : '#f4f3f4'}
