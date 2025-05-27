@@ -29,7 +29,7 @@ export default function RRewardCheck() {
   };
 
   const goToInputFood = () => {
-    router.push('/input-food/input_select');
+    router.push('/input-food/input-select');
   };
 
   return (

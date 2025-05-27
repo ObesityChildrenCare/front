@@ -20,7 +20,7 @@ export default function MainScreen() {
   };
 
   const handleInputSelect = () => {
-    router.push('/input-food/input_select');
+    router.push('/input-food/input-select');
   };
 
   const handleRankHome = () => {
