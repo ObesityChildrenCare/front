@@ -7,6 +7,7 @@ import LoginBackground from '@/components/LoginBackground';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import {
+    Dimensions,
     Image,
     ScrollView,
     StyleSheet,
@@ -14,11 +15,10 @@ import {
     Text,
     TouchableOpacity,
     TouchableWithoutFeedback,
-    View,
-    Dimensions
+    View
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { LineChart } from 'react-native-chart-kit';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function parentSummary() {
 
@@ -86,10 +86,6 @@ export default function parentSummary() {
                                         <Text style={{ color: 'rgba(255, 208, 96, 1)', fontWeight: 'bold' }}>부족</Text>
                                         <Text>해요.</Text>
                                     </Text>
-
-                                    <TouchableOpacity style={styles.editButton}>
-                                        <Text style={styles.editButtonText}>수정하기</Text>
-                                    </TouchableOpacity>
                                 </View>
                             </View>
 
@@ -181,7 +177,7 @@ export default function parentSummary() {
                                         fill: '#C1A6F8',
                                     },
                                     formatYLabel: (yValue) => parseInt(yValue).toString(),
-                                  }}
+                                }}
                                 style={{
                                     marginVertical: 8,
                                     borderRadius: 20,
@@ -405,5 +401,5 @@ const styles = StyleSheet.create({
         padding: 10,
         marginTop: 30,
         alignItems: 'center',
-      },
+    },
 });
