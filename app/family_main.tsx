@@ -11,7 +11,7 @@ import {
   View,
 } from 'react-native';
 
-export default function MainScreen() {
+export default function FamilyMainScreen() {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled((prev) => !prev);
 
@@ -94,10 +94,16 @@ export default function MainScreen() {
 
           <View style={styles.rewardsRow}>
             <TouchableOpacity style={styles.rewardBox} onPress={handleKidsHome}>
-              <Image source={require('@/assets/images/surprised_panda_big.png')} style={styles.buttonIcon} />
+              <Image
+                source={require('@/assets/images/surprised_panda_big.png')}
+                style={styles.buttonIcon}
+              />
             </TouchableOpacity>
             <TouchableOpacity style={styles.rewardBox} onPress={handleRankHome}>
-              <Image source={require('@/assets/images/prize.png')} style={styles.buttonIcon} />
+              <Image
+                source={require('@/assets/images/prize.png')}
+                style={styles.buttonIcon}
+              />
             </TouchableOpacity>
           </View>
         </View>

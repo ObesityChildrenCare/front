@@ -30,7 +30,7 @@ export default function WorkCheckFinScreen() {
         {/* 퍼즐 아이콘 + 배경 카드 */}
         <View style={styles.puzzleCard}>
           <Image
-            source={require('@/assets/images/yellow_puzzle_big.png')}
+            source={require('@/assets/images/yellow_puzzle.png')}
             style={styles.puzzle}
           />
         </View>

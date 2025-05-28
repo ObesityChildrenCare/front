@@ -122,7 +122,7 @@ export default function MainScreen() {
                 style={styles.buttonIcon}
               />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.rewardBox}>
+            <TouchableOpacity style={styles.rewardBox} onPress={goProgressMap}>
               <Image
                 source={require('@/assets/images/yellow_puzzle.png')}
                 style={styles.buttonIcon}

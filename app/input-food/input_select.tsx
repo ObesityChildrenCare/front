@@ -37,7 +37,7 @@ export default function InputSelect() {
   return (
     <LoginBackground>
       {/* 뒤로가기 버튼 */}
-      <BackButton onPress={() => router.replace('/kids_main')} />
+      <BackButton />
 
       <SafeAreaView style={styles.container}>
         {/* 판다 이미지 */}

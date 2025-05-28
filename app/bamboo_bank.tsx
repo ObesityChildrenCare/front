@@ -10,9 +10,13 @@ import {
   View,
 } from 'react-native';
 
-export default function MainScreen() {
+export default function BankScreen() {
   const handlePrev = () => {
     router.back();
+  };
+
+  const handleReward = () => {
+    router.push('/reward/rprogress_map');
   };
 
   return (
@@ -52,7 +56,10 @@ export default function MainScreen() {
           </View>
         </View>
 
-        <TouchableOpacity style={styles.collectButtonContainer}>
+        <TouchableOpacity
+          style={styles.collectButtonContainer}
+          onPress={handleReward}
+        >
           <Text style={{ fontSize: 17, color: '#FFF', fontWeight: 'bold' }}>
             대나무 모으러 가기
           </Text>

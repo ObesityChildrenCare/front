@@ -108,7 +108,7 @@ export default function RRewardCheck() {
           </TouchableOpacity>
           <TouchableOpacity style={styles.buttonBox} onPress={goToBambooBank}>
             <Image
-              source={require('@/assets/images/bamboo.png')}
+              source={require('@/assets/images/bamboo_big.png')}
               style={styles.buttonIcon}
             />
           </TouchableOpacity>
