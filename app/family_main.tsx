@@ -1,6 +1,6 @@
 import LoginBackground from '@/components/LoginBackground';
-import { router } from 'expo-router';
-import { useState } from 'react';
+import { router, useFocusEffect } from 'expo-router';
+import { useCallback, useEffect, useState } from 'react';
 import {
   Image,
   SafeAreaView,
@@ -13,7 +13,25 @@ import {
 
 export default function FamilyMainScreen() {
   const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled((prev) => !prev);
+
+  // 자동으로 토글 초기화
+  useFocusEffect(
+    useCallback(() => {
+      setIsEnabled(false);
+    }, [])
+  );
+
+  // ✅ 상태 변경에 따라 라우팅 수행
+  useEffect(() => {
+    if (isEnabled) {
+      router.push('/parent/access');
+    }
+  }, [isEnabled]);
+
+  // ✅ 토글은 상태만 변경
+  const toggleSwitch = () => {
+    setIsEnabled((prev) => !prev);
+  };
 
   const handleKidsHome = () => {
     router.push('/kids_main');
@@ -25,17 +43,16 @@ export default function FamilyMainScreen() {
 
   return (
     <LoginBackground>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>MAIN</Text>
+        <Switch
+          trackColor={{ false: '#ccc', true: '#D8B4F8' }}
+          thumbColor={isEnabled ? '#fff' : '#f4f3f4'}
+          onValueChange={toggleSwitch}
+          value={isEnabled}
+        />
+      </View>
       <SafeAreaView style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.headerText}>MAIN</Text>
-          <Switch
-            trackColor={{ false: '#ccc', true: '#D8B4F8' }}
-            thumbColor={isEnabled ? '#fff' : '#f4f3f4'}
-            onValueChange={toggleSwitch}
-            value={isEnabled}
-          />
-        </View>
-
         <View style={styles.imageContainer}>
           <Image
             source={require('@/assets/images/family.png')}
@@ -122,6 +139,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginTop: 45,
     marginBottom: 16,
     paddingHorizontal: 30,
     paddingTop: 15,
