@@ -50,7 +50,25 @@ export default function InputFood2() {
         }
       }
       if (option === 'photo') {
-        router.push('/input-food/input_food_3')
+        const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
+        if (!permissionResult.granted) {
+          alert('카메라 접근 권한이 필요합니다.');
+          return;
+        }
+      
+        const pickerResult = await ImagePicker.launchCameraAsync({
+          allowsEditing: true,
+          quality: 1,
+        });
+      
+        if (!pickerResult.canceled && pickerResult.assets && pickerResult.assets.length > 0) {
+          const takenPhotoUri = pickerResult.assets[0].uri;
+          setImage(takenPhotoUri);
+          router.push({
+            pathname: '/input-food/input_food_3',
+            params: { image: takenPhotoUri, },
+          });
+        }
       }
     }
     // 이전 버튼 함수
@@ -60,7 +78,7 @@ export default function InputFood2() {
     // 다음 버튼 함수
     const handleNext = () => {
       router.push({
-        pathname: '/input-food/input_food_3',
+        pathname: '/input-food/input_food_5',
         params: {
           childName,
         },
