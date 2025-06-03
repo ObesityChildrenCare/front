@@ -1,5 +1,5 @@
 import LoginBackground from '@/components/LoginBackground';
-import { router, useFocusEffect } from 'expo-router';
+import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
 import {
   Image,
@@ -14,6 +14,7 @@ import {
 export default function FamilyMainScreen() {
   const [isEnabled, setIsEnabled] = useState(false);
 
+  const { childName, gender, height, weight } = useLocalSearchParams();
   // 자동으로 토글 초기화
   useFocusEffect(
     useCallback(() => {
@@ -24,7 +25,15 @@ export default function FamilyMainScreen() {
   // ✅ 상태 변경에 따라 라우팅 수행
   useEffect(() => {
     if (isEnabled) {
-      router.push('/parent/access');
+      router.push({
+        pathname: '/parent/access',
+        params: {
+          childName,
+          gender,
+          height,
+          weight,
+        },
+      });
     }
   }, [isEnabled]);
 
@@ -34,11 +43,27 @@ export default function FamilyMainScreen() {
   };
 
   const handleKidsHome = () => {
-    router.push('/kids_main');
+    router.push({
+      pathname: '/kids_main',
+      params: {
+        childName,
+        gender,
+        height,
+        weight,
+      },
+    });
   };
 
   const handleRankHome = () => {
-    router.push('/family_ranking');
+    router.push({
+      pathname: '/family_ranking',
+      params: {
+        childName,
+        gender,
+        height,
+        weight,
+      },
+    });
   };
 
   return (
@@ -71,7 +96,7 @@ export default function FamilyMainScreen() {
               <Text
                 style={{ fontWeight: 'bold', color: '#2E0854', fontSize: 16 }}
               >
-                '민서'
+                '{childName}'
               </Text>{' '}
               야
             </Text>

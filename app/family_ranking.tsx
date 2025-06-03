@@ -1,5 +1,6 @@
 import BackButton from '@/components/BackButton';
 import LoginBackground from '@/components/LoginBackground';
+import { useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 import {
   Image,
@@ -13,6 +14,7 @@ import {
 export default function RankingScreen() {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled((prev) => !prev);
+  const { childName } = useLocalSearchParams();
 
   return (
     <LoginBackground>
@@ -52,7 +54,7 @@ export default function RankingScreen() {
               <Text
                 style={{ fontWeight: '700', color: '#2E0854', fontSize: 15 }}
               >
-                '민서'
+                '{childName}'
               </Text>{' '}
               가 지금 1등으로 움직이고 있어요!
             </Text>

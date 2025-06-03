@@ -20,6 +20,7 @@ import LoginBackground from '@/components/LoginBackground';
 export default function InputExer3() {
   //1페이지에서 받은거 다시 넘기기
   const params = useLocalSearchParams();
+  const childName = useLocalSearchParams();
   const exercise = typeof params.exercise === 'string' ? params.exercise : '';
 
   // 이전 버튼 함수

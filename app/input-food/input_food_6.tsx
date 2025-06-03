@@ -3,7 +3,7 @@
    선물 받는 창
 
 */
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
 import {
   Image,
@@ -21,6 +21,7 @@ export default function InputFood6() {
   const [selected, setSelected] = useState<
     'sel1' | 'sel2' | 'sel3' | 'sel4' | null
   >(null);
+  const { childName } = useLocalSearchParams();
 
   const handleSelect = (option: typeof selected) => {
     setSelected(option);
@@ -52,7 +53,7 @@ export default function InputFood6() {
         {/* 텍스트 박스 */}
         <Text style={styles.bigText}>도와줘서 고마워 ☺</Text>
         <Text style={styles.normalText}>
-          오늘도 기록해준 OO을 위해{'\n'}선물을 준비했어!
+          오늘도 기록해준 {childName}을 위해{'\n'}선물을 준비했어!
         </Text>
 
         <View style={styles.gridContainer}>
