@@ -1,5 +1,5 @@
 import LoginBackground from '@/components/LoginBackground';
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 import {
   Image,
@@ -13,9 +13,11 @@ import {
 
 export default function SignupChinfoScreen() {
   // 여기부터 시작
-  const [gender, setGender] = useState<'boy' | 'girl' | null>(null);
+  const [gender, setGender] = useState<'남자' | '여자' | null>(null);
   const [height, setHeight] = useState('');
   const [weight, setWeight] = useState('');
+
+  const { childName } = useLocalSearchParams();
 
   const handleNext = () => {
     if (!height.trim() || !weight.trim() || !gender) {
@@ -23,7 +25,15 @@ export default function SignupChinfoScreen() {
       return;
     }
 
-    router.push('/signup/signup_price_agree');
+    router.push({
+      pathname: '/signup/signup_price_agree',
+      params: {
+        childName,
+        gender,
+        height,
+        weight,
+      },
+    });
   };
 
   const handlePrev = () => {
@@ -49,20 +59,20 @@ export default function SignupChinfoScreen() {
         <View style={styles.genderContainer}>
           <TouchableOpacity
             style={styles.radioButton}
-            onPress={() => setGender('boy')}
+            onPress={() => setGender('남자')}
           >
             <Text style={styles.radioCircle}>
-              {gender === 'boy' ? '●' : '○'}
+              {gender === '남자' ? '●' : '○'}
             </Text>
             <Text style={styles.radioLabel}>남</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.radioButton}
-            onPress={() => setGender('girl')}
+            onPress={() => setGender('여자')}
           >
             <Text style={styles.radioCircle}>
-              {gender === 'girl' ? '●' : '○'}
+              {gender === '여자' ? '●' : '○'}
             </Text>
             <Text style={styles.radioLabel}>여</Text>
           </TouchableOpacity>

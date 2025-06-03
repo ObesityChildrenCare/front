@@ -3,7 +3,7 @@
     부모 인증을 완료하고 나면 아이에게 식사 기록 요청을 보내는 칸 !
 */
 import LoginBackground from '@/components/LoginBackground';
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 import {
   Dimensions,
@@ -21,6 +21,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function ParentSummary() {
   const [isEnabled, setIsEnabled] = useState(true);
+  const { childName, gender, height, weight } = useLocalSearchParams();
   const toggleSwitch = () => {
     setIsEnabled((prev) => {
       const newValue = prev;
@@ -70,7 +71,7 @@ export default function ParentSummary() {
 
                 <View style={styles.profileInfo}>
                   <Text style={styles.nameText}>
-                    김 민서 <Text style={styles.suffixText}>(님)</Text>
+                    {childName} <Text style={styles.suffixText}>(님)</Text>
                   </Text>
 
                   <Text style={styles.infoText}>

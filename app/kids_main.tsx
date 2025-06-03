@@ -1,6 +1,6 @@
 import BackButton from '@/components/BackButton';
 import LoginBackground from '@/components/LoginBackground';
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 import {
   Image,
@@ -14,17 +14,28 @@ import {
 export default function MainScreen() {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled((prev) => !prev);
+  const { childName, gender, height, weight } = useLocalSearchParams();
 
   const handleKidsHome = () => {
     // router.replace('/kids_home');
   };
 
   const handleInputSelect = () => {
-    router.push('/input-food/input_select');
+    router.push({
+      pathname: '/input-food/input_select',
+      params: {
+        childName,
+      },
+    });
   };
 
   const handleRankHome = () => {
-    router.push('/family_ranking');
+    router.push({
+      pathname: '/family_ranking',
+      params: {
+        childName,
+      },
+    });
   };
 
   const handleBambooBank = () => {
@@ -62,7 +73,7 @@ export default function MainScreen() {
             marginLeft: 22,
           }}
         >
-          오늘도 환영해, 민서야!
+          오늘도 환영해, {childName}야!
         </Text>
         <View style={styles.imageContainer}>
           <Image

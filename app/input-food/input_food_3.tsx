@@ -32,6 +32,7 @@ export default function InputFood3() {
     setSelected(option);
   };
 
+  const { childName } = useLocalSearchParams();
   // 이전 버튼 함수
   const handleBefore = () => {
     router.back();
@@ -39,7 +40,12 @@ export default function InputFood3() {
   // 다음 버튼 함수
   const handleNext = () => {
     if (selected === 'yes') {
-      router.push('/input-food/input_food_4');
+      router.push({
+        pathname: '/input-food/input_food_4',
+        params: {
+          childName,
+        },
+      });
     }
   };
   const imageParam = typeof image === 'string' ? image : Array.isArray(image) ? image[0] : undefined;

@@ -25,7 +25,12 @@ export default function SignupAgreeScreen() {
       return;
     }
     // 다음 화면으로 이동
-    router.push('/signup/signup_chinfo');
+    router.push({
+      pathname: '/signup/signup_chinfo',
+      params: {
+        childName,
+      },
+    });
   };
 
   const handlePrev = () => {

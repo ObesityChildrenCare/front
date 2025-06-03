@@ -3,7 +3,7 @@
    밥과 간식중에 뭘 먹었는지 선택하는 창
 
 */
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
 import {
   Image,
@@ -19,7 +19,7 @@ import LoginBackground from '@/components/LoginBackground';
 
 export default function InputFood1() {
   const [selected, setSelected] = useState<'meal' | 'snack' | null>(null);
-
+  const { childName } = useLocalSearchParams();
   const handleSelect = (option: 'meal' | 'snack') => {
     setSelected(option);
   };
@@ -29,13 +29,19 @@ export default function InputFood1() {
   };
   // 다음 버튼 함수
   const handleNext = () => {
-    if (selected === 'meal') {
-      router.push('/input-food/input_food_2');
-    } else if (selected === 'snack') {
-      router.push('/input-food/input_food_2');
-    } else {
-      router.push('/input-food/input_food_2');
-    }
+    // if (selected === 'meal') {
+    //   router.push('/input-food/input_food_2');
+    // } else if (selected === 'snack') {
+    //   router.push('/input-food/input_food_2');
+    // } else {
+    //   router.push('/input-food/input_food_2');
+    // }
+    router.push({
+      pathname: '/input-food/input_food_2',
+      params: {
+        childName,
+      },
+    });
   };
 
   return (

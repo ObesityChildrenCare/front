@@ -3,7 +3,7 @@
     부모 인증을 완료하고 나면 아이에게 식사 기록 요청을 보내는 칸 !
 */
 import LoginBackground from '@/components/LoginBackground';
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 import {
   Image,
@@ -16,6 +16,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Parentlocked() {
+  const { childName, gender, height, weight } = useLocalSearchParams();
   const [isEnabled, setIsEnabled] = useState(true);
   const toggleSwitch = () => {
     setIsEnabled((prev) => {
@@ -28,7 +29,15 @@ export default function Parentlocked() {
   };
 
   const handleNext = () => {
-    router.push('/parent/summary');
+    router.push({
+      pathname: '/parent/summary',
+      params: {
+        childName,
+        gender,
+        height,
+        weight,
+      },
+    });
   };
 
   const handleHome = () => {
@@ -63,13 +72,13 @@ export default function Parentlocked() {
 
           <View style={styles.profileInfo}>
             <Text style={styles.nameText}>
-              김 민서 <Text style={styles.suffixText}>(님)</Text>
+              {childName} <Text style={styles.suffixText}>(님)</Text>
             </Text>
 
-            <Text style={styles.infoText}>성별  여</Text>
+            <Text style={styles.infoText}>성별  {gender}</Text>
             <Text style={styles.infoText}>나이  만 11세</Text>
-            <Text style={styles.infoText}>신장  140 (cm)</Text>
-            <Text style={styles.infoText}>몸무게 30 (kg)</Text>
+            <Text style={styles.infoText}>신장  {height} (cm)</Text>
+            <Text style={styles.infoText}>몸무게 {weight} (kg)</Text>
 
             <TouchableOpacity style={styles.editButton}>
               <Text style={styles.editButtonText}>수정하기</Text>
@@ -85,7 +94,7 @@ export default function Parentlocked() {
 
         <View style={styles.textBox}>
           <Text style={styles.smallText}>
-            김민서님은 현재 (또래 기준) 활동량이
+            {childName} 님은 현재 (또래 기준) 활동량이
             <Text style={{ fontWeight: 'bold' }}> 부족</Text>한 상태입니다.
           </Text>
         </View>
@@ -97,8 +106,8 @@ export default function Parentlocked() {
         <View style={styles.inputRow}>
           <View style={styles.inputBox}>
             <Text style={[styles.smallText]}>
-              '<Text style={{ fontWeight: 'bold' }}>민서</Text>' 에게 식사 기록
-              요청 보내기
+              '<Text style={{ fontWeight: 'bold' }}>{childName}</Text>' 에게
+              식사 기록 요청 보내기
             </Text>
           </View>
           <TouchableOpacity style={styles.inputArrow} onPress={handleNext}>

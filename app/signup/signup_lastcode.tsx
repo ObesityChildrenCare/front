@@ -1,6 +1,6 @@
 import LoginBackground from '@/components/LoginBackground';
 import * as Clipboard from 'expo-clipboard';
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import {
   Image,
   SafeAreaView,
@@ -23,12 +23,21 @@ export default function SignupLastcodeScreen() {
     return `2025-${randomLetters}-${randomNumber}`;
   };
 
+  const { childName, gender, height, weight } = useLocalSearchParams();
   const code = generateRandomCode();
 
   const handleNext = () => {
     // 홈으로 이동
     alert('홈으로 이동합니다');
-    router.push('/family_main');
+    router.push({
+      pathname: '/family_main',
+      params: {
+        childName,
+        gender,
+        height,
+        weight,
+      },
+    });
   };
 
   const share = () => {
