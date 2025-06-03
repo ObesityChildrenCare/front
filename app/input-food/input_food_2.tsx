@@ -3,7 +3,7 @@
    사진을 어떻게 불러올건지, 찍을건지, 없는지 선택하는 창
 
 */
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
 import {
   Image,
@@ -21,7 +21,7 @@ export default function InputFood2() {
   const [selected, setSelected] = useState<'gal' | 'photo' | 'none' | null>(
     null
   );
-
+  const { childName } = useLocalSearchParams();
   const handleSelect = (option: 'gal' | 'photo' | 'none') => {
     setSelected(option);
   };
@@ -31,7 +31,12 @@ export default function InputFood2() {
   };
   // 다음 버튼 함수
   const handleNext = () => {
-    router.push('/input-food/input_food_3');
+    router.push({
+      pathname: '/input-food/input_food_3',
+      params: {
+        childName,
+      },
+    });
   };
 
   return (

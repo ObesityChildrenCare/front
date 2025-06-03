@@ -1,5 +1,5 @@
 import LoginBackground from '@/components/LoginBackground';
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 import {
   Image,
@@ -13,6 +13,7 @@ import {
 export default function SignupPriceAgreeScreen() {
   const [agree, setAgree] = useState<'yes' | 'no' | null>(null);
 
+  const { childName, gender, height, weight } = useLocalSearchParams();
   const handleNext = () => {
     if (!agree) {
       alert('동의 여부를 선택해주세요.');
@@ -24,7 +25,15 @@ export default function SignupPriceAgreeScreen() {
       return;
     }
     // 다음 화면으로 이동
-    router.push('/signup/signup_lastcode');
+    router.push({
+      pathname: '/signup/signup_lastcode',
+      params: {
+        childName,
+        gender,
+        height,
+        weight,
+      },
+    });
   };
 
   const handlePrev = () => {

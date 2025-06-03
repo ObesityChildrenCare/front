@@ -88,7 +88,6 @@ export default function LoginScreenChild() {
           <Text style={styles.footerText}>암호를 모르겠나요? </Text>
 
           <TouchableOpacity>
-
             <Text style={styles.signup}>요청하기</Text>
           </TouchableOpacity>
         </View>

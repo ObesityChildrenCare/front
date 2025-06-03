@@ -3,7 +3,7 @@
    무슨 운동을 했는지 선택하는 창
 
 */
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
 import {
   Image,
@@ -19,6 +19,7 @@ import BackButton from '@/components/BackButton';
 import LoginBackground from '@/components/LoginBackground';
 
 export default function InputExer2() {
+  const { childName } = useLocalSearchParams();
   // 이전 버튼 함수
   const handleBefore = () => {
     router.back();
@@ -28,10 +29,10 @@ export default function InputExer2() {
     if (customExercise.trim()) {
       router.push({
         pathname: '/input-food/input_exer_3',
-        params: { exercise: customExercise },
+        params: { exercise: customExercise, childName },
       });
     } else {
-      alert('운동 이름을 입력해줘줘!');
+      alert('운동 이름을 입력해줘!');
     }
   };
 

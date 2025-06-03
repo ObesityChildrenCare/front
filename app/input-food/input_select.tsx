@@ -3,7 +3,7 @@
     먹은것과 운동중에 무엇을 기록하고 싶은지 선택하는 창
 
 */
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
 import {
   Image,
@@ -18,6 +18,7 @@ import BackButton from '@/components/BackButton';
 import LoginBackground from '@/components/LoginBackground';
 
 export default function InputSelect() {
+  const { childName } = useLocalSearchParams();
   // 음식과 운동중에 뭘 선택했는지 저장
   const [selected, setSelected] = useState<'food' | 'exercise' | null>(null);
   const handleSelect = (option: 'food' | 'exercise') => {
@@ -27,9 +28,19 @@ export default function InputSelect() {
   // 다음 버튼 함수
   const handleNext = () => {
     if (selected === 'food') {
-      router.push('/input-food/input_food_1');
+      router.push({
+        pathname: '/input-food/input_food_1',
+        params: {
+          childName,
+        },
+      });
     } else if (selected === 'exercise') {
-      router.push('/input-food/input_exer_1');
+      router.push({
+        pathname: '/input-food/input_exer_1',
+        params: {
+          childName,
+        },
+      });
     } else {
     }
   };

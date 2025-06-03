@@ -3,7 +3,7 @@
    사진을 인식해서 해당 음식을 먹은게 맞는지 물어보는 창
 
 */
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
 import {
   Image,
@@ -24,8 +24,10 @@ export default function InputFood4() {
     setSelected(option);
   };
 
+  const { childName } = useLocalSearchParams();
+
   // temp 값
-  const foodName = '망고맥주';
+  const foodName = '푸딩';
 
   // 받침계산 "(이)잖아?"용
   const hasFinalConsonant = (word: string) => {
@@ -45,9 +47,19 @@ export default function InputFood4() {
   // 다음 버튼 함수
   const handleNext = () => {
     if (selected === 'yes') {
-      router.push('/input-food/input_food_6');
+      router.push({
+        pathname: '/input-food/input_food_6',
+        params: {
+          childName,
+        },
+      });
     } else if (selected === 'no') {
-      router.push('/input-food/input_food_5');
+      router.push({
+        pathname: '/input-food/input_food_5',
+        params: {
+          childName,
+        },
+      });
     } else {
     }
   };

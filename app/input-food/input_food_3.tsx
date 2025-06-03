@@ -3,7 +3,7 @@
    이 사진이 맞는지 확인하는 창
 
 */
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
 import {
   Dimensions,
@@ -28,6 +28,7 @@ export default function InputFood3() {
     setSelected(option);
   };
 
+  const { childName } = useLocalSearchParams();
   // 이전 버튼 함수
   const handleBefore = () => {
     router.back();
@@ -35,7 +36,12 @@ export default function InputFood3() {
   // 다음 버튼 함수
   const handleNext = () => {
     if (selected === 'yes') {
-      router.push('/input-food/input_food_4');
+      router.push({
+        pathname: '/input-food/input_food_4',
+        params: {
+          childName,
+        },
+      });
     }
   };
 
@@ -51,7 +57,7 @@ export default function InputFood3() {
 
         {/* 제출한 사진 */}
         <Image
-          source={require('@/assets/images/TempPicture.jpg')}
+          source={require('@/assets/images/ExPicture.jpg')}
           style={styles.picture}
         />
 

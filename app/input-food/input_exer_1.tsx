@@ -3,7 +3,7 @@
    9가지 제시된 것 중 맞는게 무엇인지 선택하는 창
 
 */
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
 
 import {
@@ -20,16 +20,22 @@ import LoginBackground from '@/components/LoginBackground';
 
 export default function InputExer1() {
   const [selected, setSelected] = useState<string | null>(null);
+  const { childName } = useLocalSearchParams();
 
   const handleSelect = (label: string) => {
     setSelected(label);
 
     if (label === '여기 없어') {
-      router.push('/input-food/input_exer_2');
+      router.push({
+        pathname: '/input-food/input_exer_2',
+        params: {
+          childName,
+        },
+      });
     } else {
       router.push({
         pathname: '/input-food/input_exer_3',
-        params: { exercise: label },
+        params: { exercise: label, childName },
       });
       console.log('선택한 운동:', label);
     }

@@ -3,7 +3,7 @@
     family main에서 on/off 버튼을 누르면 나오는 부모 인증 화면 !
 */
 import LoginBackground from '@/components/LoginBackground';
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 import {
   Image,
@@ -17,6 +17,7 @@ import {
 } from 'react-native';
 
 export default function ParentAccess() {
+  const { childName, gender, height, weight } = useLocalSearchParams();
   const [isEnabled, setIsEnabled] = useState(true);
   const toggleSwitch = () => {
     setIsEnabled((prev) => {
@@ -30,7 +31,15 @@ export default function ParentAccess() {
 
   const handleNext = () => {
     if (password.trim()) {
-      router.push('/parent/main_locked');
+      router.push({
+        pathname: '/parent/main_locked',
+        params: {
+          childName,
+          gender,
+          height,
+          weight,
+        },
+      });
     } else {
       alert('암호를 입력해주세요.');
     }
