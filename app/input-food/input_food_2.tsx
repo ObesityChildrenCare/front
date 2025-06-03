@@ -16,15 +16,42 @@ import {
 
 import BackButton from '@/components/BackButton';
 import LoginBackground from '@/components/LoginBackground';
+import * as ImagePicker from 'expo-image-picker'; 
 
 export default function InputFood2() {
   const [selected, setSelected] = useState<'gal' | 'photo' | 'none' | null>(
     null
   );
-
-  const handleSelect = (option: 'gal' | 'photo' | 'none') => {
+  const [image, setImage] = useState<string | null>(null);
+  const handleSelect = async (option: 'gal' | 'photo' | 'none') => {
     setSelected(option);
-  };
+
+    if (option === 'gal') {
+      const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (!permissionResult.granted) {
+        alert('갤러리 접근 권한이 필요합니다.');
+        return;
+      }
+
+      let pickerResult = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ['images', 'videos'],
+          allowsEditing: true,
+          quality: 1,
+      });
+
+      if (!pickerResult.canceled && pickerResult.assets && pickerResult.assets.length > 0) {
+        const selectedImageUri = pickerResult.assets[0].uri;
+        setImage(selectedImageUri);
+        router.push({
+          pathname: '/input-food/input_food_3',
+          params: { image: selectedImageUri },
+        });
+      }
+    }
+    if (option === 'photo') {
+      router.push('/input-food/input_food_3')
+    }
+  }
   // 이전 버튼 함수
   const handleBefore = () => {
     router.back();

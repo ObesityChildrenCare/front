@@ -3,7 +3,7 @@
    이 사진이 맞는지 확인하는 창
 
 */
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
 import {
   Dimensions,
@@ -21,7 +21,11 @@ import LoginBackground from '@/components/LoginBackground';
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
 
+
 export default function InputFood3() {
+
+  const { image } = useLocalSearchParams();
+
   const [selected, setSelected] = useState<'yes' | 'no' | null>(null);
 
   const handleSelect = (option: 'yes' | 'no') => {
@@ -38,6 +42,8 @@ export default function InputFood3() {
       router.push('/input-food/input_food_4');
     }
   };
+  const imageParam = typeof image === 'string' ? image : Array.isArray(image) ? image[0] : undefined;
+
 
   return (
     <LoginBackground>
@@ -50,10 +56,8 @@ export default function InputFood3() {
         <View style={styles.background2} />
 
         {/* 제출한 사진 */}
-        <Image
-          source={require('@/assets/images/TempPicture.jpg')}
-          style={styles.picture}
-        />
+        
+        <Image source={{ uri: imageParam }} style={styles.picture} />
 
         {/* 판다 */}
         <Image
@@ -180,8 +184,8 @@ const styles = StyleSheet.create({
   },
   picture: {
     position: 'absolute',
-    width: screenWidth - 60,
-    height: screenHeight - 450,
+    width: screenWidth-60,
+    height: screenHeight-450,
     borderRadius: 30,
     top: 90,
     left: 0,
