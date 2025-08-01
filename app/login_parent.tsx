@@ -32,7 +32,7 @@ export default function LoginScreenParent() {
   };
 
   const handleKeyboard = () => {
-    Keyboard.dismiss(); // ✅ 키보드 내리기
+    Keyboard.dismiss(); // 키보드 내리기
   };
 
   const handleLogin = () => {
@@ -103,7 +103,7 @@ export default function LoginScreenParent() {
   );
 }
 
-// ✅ 타입 생략하고 스타일만 작성 (TypeScript 에러 방지)
+// 타입 생략하고 스타일만 작성 (TypeScript 에러 방지)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
